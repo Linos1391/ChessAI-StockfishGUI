@@ -89,7 +89,7 @@ pip install -r requirements.txt
 
 ## Running
 
-Run the [ChessGUI.py](ChessAI/ChessGUI.py) file
+Run the [ChessAI/ChessGUI.py](ChessAI/ChessGUI.py) file
 
 ```
 python ChessAI/ChessGUI.py
