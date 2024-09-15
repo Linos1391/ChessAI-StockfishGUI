@@ -63,7 +63,7 @@ cd ChessAI
 Install the required python package
 
 ```
-pip install -p requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Setup Stockfish
