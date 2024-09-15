@@ -68,7 +68,7 @@ pip install -p requirements.txt
 ## Setup Stockfish
 
 - Go to [download page](https://stockfishchess.org/download/) and install Stockfish that support your device
-- Open [setting.json](setting.json) file
+- Open [setting.json](ChessAI/setting.json) file
 ```
 {
     "ChessAI": {
