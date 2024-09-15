@@ -53,14 +53,14 @@ This application will help you analyse chess position as a sub window.
 
 ## Installing
 
-Clone the repositories
+1. Clone the repositories
 
 ```
 git clone https://github.com/Linos1391/ChessAI.git
 cd ChessAI
 ```
 
-Install the required python package
+2. Install the required python package
 
 ```
 pip install -r requirements.txt
@@ -68,8 +68,8 @@ pip install -r requirements.txt
 
 ## Setup Stockfish
 
-- Go to [download page](https://stockfishchess.org/download/) and install Stockfish that support your device
-- Open [setting.json](ChessAI/setting.json) file
+1. Go to [download page](https://stockfishchess.org/download/) and install Stockfish that support your device
+2. Open [setting.json](ChessAI/setting.json) file
 ```
 {
     "ChessAI": {
