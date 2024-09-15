@@ -57,6 +57,7 @@ Clone the repositories
 
 ```
 git clone https://github.com/Linos1391/ChessAI.git
+cd ChessAI
 ```
 
 Install the required python package
