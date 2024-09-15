@@ -345,13 +345,17 @@ class ChessGUIApp:
                     if self.is_black:
                         if self.black_side:
                             locY = y + index_y - 2
+                            self.forward = True
                         else:
                             locY = y - index_y + 2
+                            self.forward = False
                     else:
                         if self.black_side:
                             locY = y - index_y + 2
+                            self.forward = False
                         else:
                             locY = y + index_y - 2
+                            self.forward = True
                                  
                     if not 0 <= locX <= 7:
                         continue
@@ -365,6 +369,9 @@ class ChessGUIApp:
                         last_move: str = f'{ALPHABET_DICT[str(x)]}{8 - y}'
                         move: str = f'{ALPHABET_DICT[str(locX)]}{8 - locY}'
                     
+                    if (self.forward and locY == 0) or (not self.forward and locY == 7):
+                        move += 'q'
+
                     if not self.engine.check_move([last_move + move]):
                         continue
                                       
@@ -376,6 +383,7 @@ class ChessGUIApp:
                             
                     if index_y == 1 and index_x == 1:
                         self.move_board[locY][locX] = '.'
+            return           
 
         # bishop move
         elif self.board[y][x].lower() == 'b':
@@ -404,6 +412,7 @@ class ChessGUIApp:
                         self.move_board[locY][locX] = '.'
                         continue
                     self.move_board[locY][locX] = 'o'
+            return
                                 
         # knight move
         elif self.board[y][x].lower() == 'n':
@@ -428,6 +437,7 @@ class ChessGUIApp:
                     self.move_board[locY][locX] = '.'
                     continue
                 self.move_board[locY][locX] = 'o'
+            return
             
         # rook move
         elif self.board[y][x].lower() == 'r':
@@ -462,6 +472,7 @@ class ChessGUIApp:
                     self.move_board[locY][x] = '.'
                     continue
                 self.move_board[locY][x] = 'o'
+            return
                 
         # queen move
         elif self.board[y][x].lower() == 'q':
@@ -522,6 +533,7 @@ class ChessGUIApp:
                     self.move_board[locY][x] = '.'
                     continue
                 self.move_board[locY][x] = 'o'
+            return
             
         # king move
         else:
@@ -568,6 +580,7 @@ class ChessGUIApp:
                     continue
                     
                 self.move_board[y][index_x] = 'o'
+            return
                                     
     def show_moves(self) -> None:  
         """
@@ -595,9 +608,9 @@ class ChessGUIApp:
             last_move: str = f'{ALPHABET_DICT[str(last_x)]}{8 - last_y}'
             move: str = f'{ALPHABET_DICT[str(x)]}{8 - y}'
         
-        if self.board[last_y][last_x].lower() == 'p' and (y == 0 or y == 7):
+        if self.board[last_y][last_x].lower() == 'p' and (self.forward and y == 0) or (not self.forward and y == 7):
+           
             self.advance_dialog.show()
-
             self.mainwindow.wait_variable(self.advance_key)
             
             if self.advance_key.get() == '':
