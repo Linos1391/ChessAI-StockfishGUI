@@ -17,11 +17,6 @@
 
 
 
-
-
-
-
-
 ![Icon](assets/Icon128.png)
 
 ![ChessAI](assets/ChessAI.png)
@@ -89,10 +84,10 @@ pip install -r requirements.txt
 
 ## Running
 
-Run the [ChessAI/ChessGUI.py](ChessAI/ChessGUI.py) file
+Run the [run.py](run.py) file
 
 ```
-python ChessAI/ChessGUI.py
+python run.py
 ```
 
 ## License
