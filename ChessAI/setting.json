@@ -1,0 +1,14 @@
+{
+    "ChessAI": {
+        "Engine": "",
+        "Analyse Every Move": false,
+        "Elo": 1350
+    },
+    "Stockfish": {
+        "Debug Log File": "",
+        "UCI_Chess960": false,
+        "Min Split Depth": 0,
+        "Threads": 1,
+        "Hash": 16
+    }
+}
