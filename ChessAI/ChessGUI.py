@@ -68,6 +68,7 @@ class ChessGUIApp:
     move_last: list[int] = []
     
     move = None
+    forward = True
     
     def __init__(self, master=None):
         self.builder = builder = pygubu.Builder()
@@ -612,7 +613,7 @@ class ChessGUIApp:
             last_move: str = f'{ALPHABET_DICT[str(last_x)]}{8 - last_y}'
             move: str = f'{ALPHABET_DICT[str(x)]}{8 - y}'
         
-        if self.board[last_y][last_x].lower() == 'p' and (self.forward and y == 0) or (not self.forward and y == 7):
+        if self.board[last_y][last_x].lower() == 'p' and ((self.forward and y == 0) or (not self.forward and y == 7)):
 
             self.advance_dialog.show()
             self.mainwindow.wait_variable(self.advance_key)
