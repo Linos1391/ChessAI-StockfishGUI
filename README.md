@@ -4,10 +4,12 @@
 
 **The AI that kills chess.**
 
+![][chessai-shield]
 [![][python-shield]][python-url]
 [![][conda-shield]][conda-url]
 [![][stockfish-shield]][stockfish-url]
 
+[chessai-shield]: https://img.shields.io/badge/ChessAI-0.1.1-red
 [python-shield]: https://img.shields.io/badge/Python-3.12+-yellow
 [python-url]: https://www.python.org/downloads/
 [conda-shield]: https://img.shields.io/badge/Anaconda-24.7+-grass
@@ -30,6 +32,8 @@ This application will help you analyse chess position as a sub window.
 
 ## Features
 
+#### v0.1.0
+
 - Drag & Move setup chessboard
 
 ![features_1](assets/features_1.gif)
@@ -45,6 +49,14 @@ This application will help you analyse chess position as a sub window.
 - Able to play Chess960
 
 ![features_4](assets/features_4.gif)
+
+#### v0.1.1
+
+- Top moves are easier to located
+
+![features_5](assets/features_5.gif)
+
+
 
 ## Installing
 
@@ -93,3 +105,7 @@ python run.py
 ## License
 
 [GNU GPLv3](LICENSE)
+
+## Disclaimer
+
+This application was initially designed for analysing Chess World Cup livestreams and educational purposes. Please don't use this for any unethical reasons. Any damages from abusing this application will not be the responsibility of the author.
