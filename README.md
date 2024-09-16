@@ -44,7 +44,7 @@ This application will help you analyse chess position as a sub window.
 
 #### v0.1.0
 
-- Drag & Move setup chessboard
+- Drag&move setup chessboard
 
 ![features_1](assets/features_1.gif)
 
@@ -77,7 +77,7 @@ git clone https://github.com/Linos1391/ChessAI.git
 cd ChessAI
 ```
 
-2. Install the required python package
+2. Install the required python packages
 
 ```
 pip install -r requirements.txt
