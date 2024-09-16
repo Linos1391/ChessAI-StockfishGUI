@@ -2,7 +2,6 @@ from ChessGUI import ChessGUIApp
 from stockfish.models import StockfishException
 import json
 import sys
-import os
 import pathlib
 
 PROJECT_PATH: str = pathlib.Path(__file__).parent
