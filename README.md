@@ -4,12 +4,13 @@
 
 **The AI that kills chess.**
 
-![][chessai-shield]
+[![][chessai-shield]][chessai-url]
 [![][python-shield]][python-url]
 [![][conda-shield]][conda-url]
 [![][stockfish-shield]][stockfish-url]
 
 [chessai-shield]: https://img.shields.io/badge/ChessAI-0.1.1-red
+[chessai-url]: https://github.com/Linos1391/ChessAI
 [python-shield]: https://img.shields.io/badge/Python-3.12+-yellow
 [python-url]: https://www.python.org/downloads/
 [conda-shield]: https://img.shields.io/badge/Anaconda-24.7+-grass
