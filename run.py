@@ -4,7 +4,7 @@ import pathlib
 PROJECT_PATH: str = pathlib.Path(__file__).parent
 
 prompt: str = """
-python ChessAI/ChessGUI.py
+python ChessAI/main.py
 """
 
 # You may add 'conda activate ..' if needed
