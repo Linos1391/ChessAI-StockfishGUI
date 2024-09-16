@@ -80,9 +80,9 @@ class ChessGUIApp:
         self.advance_dialog = self.builder.get_object('advance', self.mainwindow)
         builder.connect_callbacks(self)
 
-        # self.mainwindow.wm_attributes('-topmost', True)
-        # self.advance_dialog.wm_attributes('-topmost', True)
-        #TODO: dialog object dont have wm_attributes
+        self.mainwindow.wm_attributes('-topmost', True)
+        self.advance_dialog.toplevel.wm_attributes('-topmost', True)
+        self.builder.get_object('warning', self.mainwindow).toplevel.wm_attributes('-topmost', True)
         self.theme = ttk.Style()
         self.theme.theme_use('default')
         
