@@ -539,10 +539,23 @@
                   <property name="y">0</property>
                 </layout>
                 <child>
-                  <object class="pygubu.builder.widgets.scrolledframe" id="scrolledframe2">
+                  <object class="ttk.Button" id="setting_update" named="True">
+                    <property name="command" type="command" cbtype="simple">setting_update_data</property>
+                    <property name="text" translatable="yes">Update</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">33</property>
+                      <property name="width">113</property>
+                      <property name="x">100</property>
+                      <property name="y">284</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame6">
+                    <property name="height">200</property>
                     <property name="relief">sunken</property>
-                    <property name="scrolltype">vertical</property>
-                    <property name="usemousewheel">true</property>
+                    <property name="width">200</property>
                     <layout manager="place">
                       <property name="anchor">nw</property>
                       <property name="height">280</property>
@@ -722,19 +735,6 @@
                         </layout>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="ttk.Button" id="setting_update" named="True">
-                    <property name="command" type="command" cbtype="simple">setting_update_data</property>
-                    <property name="text" translatable="yes">Update</property>
-                    <layout manager="place">
-                      <property name="anchor">nw</property>
-                      <property name="height">33</property>
-                      <property name="width">113</property>
-                      <property name="x">100</property>
-                      <property name="y">284</property>
-                    </layout>
                   </object>
                 </child>
               </object>
