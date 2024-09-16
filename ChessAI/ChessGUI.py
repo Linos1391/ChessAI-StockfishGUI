@@ -67,6 +67,8 @@ class ChessGUIApp:
     move_ready: bool = False
     move_last: list[int] = []
     
+    move = None
+    
     def __init__(self, master=None):
         self.builder = builder = pygubu.Builder()
         builder.add_resource_path(PROJECT_PATH)
@@ -77,6 +79,8 @@ class ChessGUIApp:
         self.advance_dialog = self.builder.get_object('advance', self.mainwindow)
         builder.connect_callbacks(self)
 
+        # self.mainwindow.wm_attributes('-topmost', True)
+        #TODO: dialog object dont have wm_attributes
         self.theme = ttk.Style()
         self.theme.theme_use('default')
         
@@ -609,7 +613,7 @@ class ChessGUIApp:
             move: str = f'{ALPHABET_DICT[str(x)]}{8 - y}'
         
         if self.board[last_y][last_x].lower() == 'p' and (self.forward and y == 0) or (not self.forward and y == 7):
-           
+
             self.advance_dialog.show()
             self.mainwindow.wait_variable(self.advance_key)
             
@@ -652,6 +656,12 @@ class ChessGUIApp:
         self.update_chessboard()
         if self.engine.data['ChessAI']['Analyse Every Move']:
             self.FEN_analyse(object)
+            
+        if self.move is not None:
+            self.builder.get_object('chessboard').delete(self.move)
+            self.move = None
+        self.builder.get_object('top1').config(relief='flat', background='')
+        self.builder.get_object('top2').config(relief='flat', background='')
              
     # +------------------------------------------------+
     # | event handler                                  |
@@ -692,7 +702,6 @@ class ChessGUIApp:
         self.update_image('select', 'chessboard', 0, 0)
         
     def chessboard_press(self, event: object) -> None:
-        
         #TODO: I tried to made use able to drag but <Motion> and <B1-Motion> not working together. 
         
         locX: int = int((event.x - 1) / 32)
@@ -827,12 +836,80 @@ class ChessGUIApp:
         except:
             engine_top2 = ''
         
-        self.builder.get_object('top1').config(text=engine_top1)
-        self.builder.get_object('top2').config(text=engine_top2)
+        self.builder.tkvariables['var_top1'].set(engine_top1)
+        self.builder.tkvariables['var_top2'].set(engine_top2)
           
         engine_elo = int(self.builder.get_variable('engine_elo').get())
         self.engine.set_elo(engine_elo)
+        
+        if self.move is not None:
+            self.builder.get_object('chessboard').delete(self.move)
+            self.move = None
+        self.builder.get_object('top1').config(relief='flat', background='')
+        self.builder.get_object('top2').config(relief='flat', background='')
+        
+    def FEN_top1(self, event: object) -> None:
+        widget = event.widget
+        
+        widget.config(relief='flat', background='')
+        self.builder.get_object('top2').config(relief='flat', background='')
+        
+        if self.move is not None:
+            self.builder.get_object('chessboard').delete(self.move)
+            self.move = None
+        
+        text = self.builder.tkvariables['var_top1'].get()
+        if text == '':
+            return
+        
+        widget.config(relief='sunken', background='#888888')
 
+        if self.black_side:
+            last_x: int = 32 * (7.5 - int(NUMBER_DICT[text[0]]))
+            last_y: int = 32 * (int(text[1]) - 0.5)
+            
+            x: int = 32 * (7.5 - int(NUMBER_DICT[text[2]]))
+            y: int = 32 * (int(text[3]) - 0.5)
+        else:
+            last_x: int = 32 * (int(NUMBER_DICT[text[0]]) + 0.5)
+            last_y: int = 32 * (8.5 - int(text[1]))
+            
+            x: int = 32 * (int(NUMBER_DICT[text[2]]) + 0.5)
+            y: int = 32 * (8.5 - int(text[3]))
+            
+        self.move = self.builder.get_object('chessboard').create_line(last_x, last_y, x, y, arrow=tk.LAST)
+           
+    def FEN_top2(self, event: object) -> None:
+        widget = event.widget
+            
+        widget.config(relief='flat', background='')
+        self.builder.get_object('top1').config(relief='flat', background='')
+        
+        if self.move is not None:
+            self.builder.get_object('chessboard').delete(self.move)
+            self.move = None
+        
+        text = self.builder.tkvariables['var_top2'].get()
+        if text == '':
+            return
+        
+        widget.config(relief='sunken', background='#888888')
+        
+        if self.black_side:
+            last_x: int = 32 * (7.5 - int(NUMBER_DICT[text[0]]))
+            last_y: int = 32 * (int(text[1]) - 0.5)
+            
+            x: int = 32 * (7.5 - int(NUMBER_DICT[text[2]]))
+            y: int = 32 * (int(text[3]) - 0.5)
+        else:
+            last_x: int = 32 * (int(NUMBER_DICT[text[0]]) + 0.5)
+            last_y: int = 32 * (8.5 - int(text[1]))
+            
+            x: int = 32 * (int(NUMBER_DICT[text[2]]) + 0.5)
+            y: int = 32 * (8.5 - int(text[3]))
+            
+        self.move = self.builder.get_object('chessboard').create_line(last_x, last_y, x, y, arrow=tk.LAST)
+        
     def advance_submit(self) -> None:
         self.advance_key.set(self.builder.get_variable('advance_key').get())
         if self.advance_key == '':
