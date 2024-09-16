@@ -52,8 +52,6 @@ ALPHABET_DICT: dict = {
 NUMBER_DICT: dict = {k: v for v, k in ALPHABET_DICT.items()}
 
 class ChessGUIApp:
-    engine = Engine()
-    
     FEN: str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" # default FEN
     is_black: bool = False # white side by default
     black_side: bool = False
@@ -70,7 +68,9 @@ class ChessGUIApp:
     move = None
     forward = True
     
-    def __init__(self, master=None):
+    def __init__(self,data: dict, master=None):
+        self.engine = Engine(data=data)
+        
         self.builder = builder = pygubu.Builder()
         builder.add_resource_path(PROJECT_PATH)
 
@@ -81,6 +81,7 @@ class ChessGUIApp:
         builder.connect_callbacks(self)
 
         # self.mainwindow.wm_attributes('-topmost', True)
+        # self.advance_dialog.wm_attributes('-topmost', True)
         #TODO: dialog object dont have wm_attributes
         self.theme = ttk.Style()
         self.theme.theme_use('default')
@@ -614,7 +615,6 @@ class ChessGUIApp:
             move: str = f'{ALPHABET_DICT[str(x)]}{8 - y}'
         
         if self.board[last_y][last_x].lower() == 'p' and ((self.forward and y == 0) or (not self.forward and y == 7)):
-
             self.advance_dialog.show()
             self.mainwindow.wait_variable(self.advance_key)
             
@@ -989,7 +989,6 @@ class ChessGUIApp:
             write_file.close()
             
         self.engine.data = data
-        
         
 
 
