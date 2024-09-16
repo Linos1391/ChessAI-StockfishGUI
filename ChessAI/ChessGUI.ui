@@ -472,6 +472,8 @@
                         </layout>
                         <child>
                           <object class="ttk.Label" id="top1" named="True">
+                            <property name="textvariable">string:var_top1</property>
+                            <bind sequence="&lt;ButtonPress-1&gt;" handler="FEN_top1" add="True" />
                             <layout manager="place">
                               <property name="anchor">nw</property>
                               <property name="height">17</property>
@@ -482,6 +484,8 @@
                         </child>
                         <child>
                           <object class="ttk.Label" id="top2" named="True">
+                            <property name="textvariable">string:var_top2</property>
+                            <bind sequence="&lt;ButtonPress-1&gt;" handler="FEN_top2" add="True" />
                             <layout manager="place">
                               <property name="anchor">nw</property>
                               <property name="height">17</property>
