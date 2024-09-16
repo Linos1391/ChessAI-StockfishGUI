@@ -17,18 +17,27 @@
 [stockfish-shield]: https://img.shields.io/badge/Stockfish-16+-green
 [stockfish-url]: https://stockfishchess.org/download/
 
-
-
 ![Icon](assets/Icon128.png)
 
 ![ChessAI](assets/ChessAI.png)
-
-
 
 This application will help you analyse chess position as a sub window.
 
 </div>
 
+## Table of contents
+
+1. [Features](#features)
+
+2. [Installing](#installing)
+
+3. [Set up Stockfish](#set-up-stockfish)
+
+4. [Running](#running)
+
+5. [License](#license)
+
+6. [Disclaimer](#disclaimer)
 
 ## Features
 
@@ -73,7 +82,7 @@ cd ChessAI
 pip install -r requirements.txt
 ```
 
-## Setup Stockfish
+## Set up Stockfish
 
 1. Go to [download page](https://stockfishchess.org/download/) and install Stockfish that support your device
 2. Open [ChessAI/setting.json](ChessAI/setting.json) file
