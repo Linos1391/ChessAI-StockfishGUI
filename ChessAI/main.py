@@ -14,7 +14,6 @@ def main():
         # Normal development mode. Use os.getcwd() or __file__ as appropriate in your case...
         path = PROJECT_PATH / 'setting.json'
     
-    
     try:
         with open(path, mode="r", encoding="utf-8") as read_file:
             data = json.load(read_file)
