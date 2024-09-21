@@ -1,3 +1,5 @@
+[English](README.md) | [Tiếng Việt](README-vi.mdS)
+
 <div align="center">
 
 # ChessAI
