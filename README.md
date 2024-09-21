@@ -24,7 +24,7 @@
 
 ![ChessAI](assets/ChessAI.png)
 
-This application will help you analyse chess position as a sub window.
+This application will help you analyse chess position as a sub-window.
 
 </div>
 
