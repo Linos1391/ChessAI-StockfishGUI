@@ -1,4 +1,4 @@
-[English](README.md) | [Tiếng Việt](README-vi.mdS)
+[English](README.md) | [Tiếng Việt](README-vi.md)
 
 <div align="center">
 
@@ -46,25 +46,25 @@ This application will help you analyse chess position as a sub-window.
 
 #### v0.1.0
 
-- Drag&move setup chessboard
+- Drag&move setup chessboard.
 
 ![features_1](assets/features_1.gif)
 
-- Playable chessboard
+- Playable chessboard.
 
 ![features_2](assets/features_2.gif)
 
-- Changable elo
+- Changable elo.
 
 ![features_3](assets/features_3.gif)
 
-- Able to play Chess960
+- Able to play Chess960.
 
 ![features_4](assets/features_4.gif)
 
 #### v0.1.1
 
-- Top moves are easier to located
+- Top moves are easier to located.
 
 ![features_5](assets/features_5.gif)
 
@@ -76,14 +76,14 @@ This application will help you analyse chess position as a sub-window.
 
 ###### Or do it manually as below:
 
-1. Clone the repository
+1. Clone the repository.
 
 ```
 git clone https://github.com/Linos1391/ChessAI.git
 cd ChessAI
 ```
 
-2. Install the required python packages
+2. Install the required python packages.
 
 ```
 pip install -r requirements.txt
@@ -91,8 +91,8 @@ pip install -r requirements.txt
 
 ## Set up Stockfish
 
-1. Go to [download page](https://stockfishchess.org/download/) and install Stockfish that support your device
-2. Open [ChessAI/setting.json](ChessAI/setting.json) file
+1. Go to [download page](https://stockfishchess.org/download/) and install Stockfish that support your device.
+2. Open [ChessAI/setting.json](ChessAI/setting.json) file.
 ```
 {
     "ChessAI": {
@@ -112,7 +112,7 @@ pip install -r requirements.txt
 
 ## Running
 
-Run the [run.py](run.py) file
+Run the [run.py](run.py) file.
 
 ```
 python run.py
