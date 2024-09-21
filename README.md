@@ -72,7 +72,7 @@ This application will help you analyse chess position as a sub-window.
 
 ## Installing
 
-1. Clone the repositories
+1. Clone the repository
 
 ```
 git clone https://github.com/Linos1391/ChessAI.git
