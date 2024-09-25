@@ -537,6 +537,7 @@
               <object class="ttk.Frame" id="frame3">
                 <property name="height">200</property>
                 <property name="width">200</property>
+                <bind sequence="&lt;Motion&gt;" handler="setting_warning" add="True" />
                 <layout manager="place">
                   <property name="anchor">nw</property>
                   <property name="x">0</property>
@@ -546,6 +547,7 @@
                   <object class="ttk.Button" id="setting_update" named="True">
                     <property name="command" type="command" cbtype="simple">setting_update_data</property>
                     <property name="text" translatable="yes">Update</property>
+                    <bind sequence="&lt;Motion&gt;" handler="setting_warning" add="True" />
                     <layout manager="place">
                       <property name="anchor">nw</property>
                       <property name="height">33</property>
@@ -560,6 +562,7 @@
                     <property name="height">200</property>
                     <property name="relief">sunken</property>
                     <property name="width">200</property>
+                    <bind sequence="&lt;Motion&gt;" handler="setting_warning" add="True" />
                     <layout manager="place">
                       <property name="anchor">nw</property>
                       <property name="height">280</property>
@@ -736,6 +739,84 @@
                           <property name="width">50</property>
                           <property name="x">250</property>
                           <property name="y">242</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_ChessAI_Analyse_Every_Move" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">40</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_Debug_Log_File" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">109</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_UCI_Chess960" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">144</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_Min_Split_Depth" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">179</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_Threads" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">214</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_Hash" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">249</property>
                         </layout>
                       </object>
                     </child>
