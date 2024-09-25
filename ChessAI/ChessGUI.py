@@ -975,12 +975,12 @@ class ChessGUIApp:
         self.builder.tkvariables['Entry_Stockfish_Hash'].set(self.engine.data['Stockfish']['Hash'])
     
     def setting_tooltip(self):
-        Hovertip(self.builder.get_object('Label_ChessAI_Analyse_Every_Move'), "Automatic analyse when you move a piece (not when set up)", 10)
-        Hovertip(self.builder.get_object('Label_Stockfish_Debug_Log_File'), "Path to file that save debug log (if needed)", 10)
-        Hovertip(self.builder.get_object('Label_Stockfish_UCI_Chess960'), "Able to play Chess960", 10)
-        Hovertip(self.builder.get_object('Label_Stockfish_Min_Split_Depth'), "Minimum depth for analyse", 10)
-        Hovertip(self.builder.get_object('Label_Stockfish_Threads'), "The number of CPU threads used for searching a position. For best performance, set\nthis equal to the number of CPU cores available (min 1 max 1024)", 10)
-        Hovertip(self.builder.get_object('Label_Stockfish_Hash'), "The size of the hash table in MB. It is recommended to set Hash after\nsetting Threads. (min 1 max 33554432)", 10)
+        Tooltip(self.builder.get_object('Label_ChessAI_Analyse_Every_Move'), "Automatic analyse when you move a piece (not when set up)")
+        Tooltip(self.builder.get_object('Label_Stockfish_Debug_Log_File'), "Path to file that save debug log (if needed)")
+        Tooltip(self.builder.get_object('Label_Stockfish_UCI_Chess960'), "Able to play Chess960")
+        Tooltip(self.builder.get_object('Label_Stockfish_Min_Split_Depth'), "Minimum depth for analyse")
+        Tooltip(self.builder.get_object('Label_Stockfish_Threads'), "The number of CPU threads used for searching a position. For best performance, set\nthis equal to the number of CPU cores available (min 1 max 1024)")
+        Tooltip(self.builder.get_object('Label_Stockfish_Hash'), "The size of the hash table in MB. It is recommended to set Hash after\nsetting Threads. (min 1 max 33554432)")
     
     def setting_data(self, widget_id):        
         if widget_id == 'ChessAI_Analyse_Every_Move':  
@@ -1021,5 +1021,4 @@ class ChessGUIApp:
 
 
 if __name__ == '__main__':
-    app = ChessGUIApp()
-    app.run()
+    print('Use "main.py" dude')
