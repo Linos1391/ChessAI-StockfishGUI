@@ -92,7 +92,7 @@ pip install -r requirements.txt
 }
 ```
 
-## Hoạt động
+## Sử dụng
 
 Chạy file [run.py](run.py).
 
