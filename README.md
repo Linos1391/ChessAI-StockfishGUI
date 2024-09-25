@@ -44,13 +44,13 @@ This application will help you analyse chess position as a sub-window.
 
 ## Features
 
-#### Visit [Change Log](CHANGELOG.md).
-
 #### New feature (v0.1.2):
 
 - Changed setting is visible.
 
 ![feature_6](assets/features_6.gif)
+
+#### For old features, visit [Change Log](CHANGELOG.md).
 
 ## Installing
 
