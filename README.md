@@ -54,9 +54,9 @@ This application will help you analyse chess position as a sub-window.
 
 ## Installing
 
-###### You may use [.exe file](https://github.com/Linos1391/ChessAI/releases/tag/main) and skip to [next step](#set-up-stockfish).
+#### Option 1: Install [.exe file](https://github.com/Linos1391/ChessAI/releases/tag/main) 
 
-###### Or do it manually as below:
+#### Option 2: Manually install through Github:
 
 1. Clone the repository.
 
