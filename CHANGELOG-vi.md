@@ -1,6 +1,6 @@
 #### v0.1.2
 
-- Hiển thị phần sửa đổi ở tab 'Settings'
+- Hiển thị phần sửa đổi ở tab 'Settings'.
 
 ![feature_6](assets/features_6.gif)
 
