@@ -51,6 +51,34 @@ ALPHABET_DICT: dict = {
 
 NUMBER_DICT: dict = {k: v for v, k in ALPHABET_DICT.items()}
 
+# Shoutout to idlelib.tooltip
+class Tooltip(Hovertip):
+    def __init__(self, anchor_widget, text):
+        super().__init__(anchor_widget, text, hover_delay=10)
+        
+    def showtip(self):
+        """display the tooltip"""
+        if self.tipwindow:
+            return
+        self.tipwindow = tw = tk.Toplevel(self.anchor_widget)
+        # show no border on the top level window
+        tw.wm_overrideredirect(1)
+        # make it on top
+        tw.wm_attributes("-topmost", True)
+        try:
+            # This command is only needed and available on Tk >= 8.4.0 for OSX.
+            # Without it, call tips intrude on the typing process by grabbing
+            # the focus.
+            tw.tk.call("::tk::unsupported::MacWindowStyle", "style", tw._w,
+                       "help", "noActivates")
+        except tk.TclError:
+            pass
+
+        self.position_window()
+        self.showcontents()
+        self.tipwindow.update_idletasks()  # Needed on MacOS -- see #34275.
+        self.tipwindow.lift()  # work around bug in Tk 8.5.18+ (issue #24570)
+
 class ChessGUIApp:
     FEN: str = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" # default FEN
     is_black: bool = False # white side by default
@@ -145,23 +173,23 @@ class ChessGUIApp:
         """
         Some tooltips.
         """
-        
-        Hovertip(self.K, "If white can castle king side", 10)
-        Hovertip(self.Q, "If white can castle queen side", 10)
-        Hovertip(self.k, "If black can castle king side", 10)
-        Hovertip(self.q, "If black can castle queen side", 10)
-        Hovertip(self.builder.get_object('flip'), "Flip the board (WIP, sometimes it got errors)", 10)
-        Hovertip(self.builder.get_object('white_side'), "Change to white's turn", 10)
-        Hovertip(self.builder.get_object('black_side'), "Change to black's turn", 10)
-        Hovertip(self.builder.get_object('stat_type'), "'cp': centipawn (already convert), 'mate': checkmate in", 10)
-        Hovertip(self.builder.get_object('stat_value'), "Positive for white, negative for black", 10)
-        Hovertip(self.builder.get_object('analyse'), "Analyse the chessboard", 10)
-        Hovertip(self.builder.get_object('elo'), "The elo rating", 10)
-        Hovertip(self.builder.get_object('halfmove'), "Halfmove clock: The number of halfmoves since the last capture\nor pawn advance, used for the fifty-move rule", 10)
-        Hovertip(self.builder.get_object('fullmove'), "Fullmove number: The number of the full moves. It starts at 1 and\nis incremented after Black's move", 10)
-        Hovertip(self.builder.get_object('top1'), "Get the first best move (from here to there)", 10)
-        Hovertip(self.builder.get_object('top2'), "Get the second best move (from here to there)", 10)
-        Hovertip(self.builder.get_object('deselect'), "Remove a piece from chessboard", 10)
+             
+        Tooltip(self.K, "If white can castle king side")
+        Tooltip(self.Q, "If white can castle queen side")
+        Tooltip(self.k, "If black can castle king side")
+        Tooltip(self.q, "If black can castle queen side")
+        Tooltip(self.builder.get_object('flip'), "Flip the board (WIP, sometimes it got errors)")
+        Tooltip(self.builder.get_object('white_side'), "Change to white's turn")
+        Tooltip(self.builder.get_object('black_side'), "Change to black's turn")
+        Tooltip(self.builder.get_object('stat_type'), "'cp': centipawn (already convert), 'mate': checkmate in")
+        Tooltip(self.builder.get_object('stat_value'), "Positive for white, negative for black")
+        Tooltip(self.builder.get_object('analyse'), "Analyse the chessboard")
+        Tooltip(self.builder.get_object('elo'), "The elo rating")
+        Tooltip(self.builder.get_object('halfmove'), "Halfmove clock: The number of halfmoves since the last capture\nor pawn advance, used for the fifty-move rule")
+        Tooltip(self.builder.get_object('fullmove'), "Fullmove number: The number of the full moves. It starts at 1 and\nis incremented after Black's move")
+        Tooltip(self.builder.get_object('top1'), "Get the first best move (from here to there)")
+        Tooltip(self.builder.get_object('top2'), "Get the second best move (from here to there)")
+        Tooltip(self.builder.get_object('deselect'), "Remove a piece from chessboard")
          
     def update_image(
         self,
