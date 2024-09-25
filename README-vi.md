@@ -44,35 +44,19 @@
 
 ## Tính năng
 
-#### v0.1.0
+#### Đến [Change Log](CHANGELOG.md).
 
-- Thiết lập ván cờ bằng cơ chế kéo thả.
+#### Tính năng mới (v0.1.2):
 
-![features_1](assets/features_1.gif)
+- Hiển thị phần sửa đổi ở tab 'Settings'.
 
-- Bàn cơ chơi được.
-
-![features_2](assets/features_2.gif)
-
-- Có thể thay đổi elo.
-
-![features_3](assets/features_3.gif)
-
-- Có thể chơi Chess960.
-
-![features_4](assets/features_4.gif)
-
-#### v0.1.1
-
-- Nước đi tốt nhất dễ nhìn hơn.
-
-![features_5](assets/features_5.gif)
+![feature_6](assets/features_6.gif)
 
 ## Tải xuống
 
-###### Bạn có thể dùng [file .exe](https://github.com/Linos1391/ChessAI/releases/tag/main) và chuyển đến [bước tiếp theo](#chuẩn-bị-stockfish).
+#### Lựa chọn 1: Tải [file .exe](https://github.com/Linos1391/ChessAI/releases/tag/main) 
 
-###### Hoặc làm thủ công theo những bước bên dưới:
+#### Lựa chon 2: Tải thủ công thông qua Github:
 
 1. Lưu thư mục về máy.
 
