@@ -44,31 +44,13 @@ This application will help you analyse chess position as a sub-window.
 
 ## Features
 
-#### v0.1.0
+#### Visit [Change Log](CHANGELOG.md).
 
-- Drag&move setup chessboard.
+#### New feature (v0.1.2):
 
-![features_1](assets/features_1.gif)
+- Changed setting is visible.
 
-- Playable chessboard.
-
-![features_2](assets/features_2.gif)
-
-- Changable elo.
-
-![features_3](assets/features_3.gif)
-
-- Able to play Chess960.
-
-![features_4](assets/features_4.gif)
-
-#### v0.1.1
-
-- Top moves are easier to located.
-
-![features_5](assets/features_5.gif)
-
-
+![feature_6](assets/features_6.gif)
 
 ## Installing
 
