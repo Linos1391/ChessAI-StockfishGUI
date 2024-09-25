@@ -238,6 +238,7 @@
                         <layout manager="place">
                           <property name="anchor">nw</property>
                           <property name="height">28</property>
+                          <property name="width">37</property>
                           <property name="x">3</property>
                           <property name="y">1</property>
                         </layout>
@@ -256,6 +257,7 @@
                         <layout manager="place">
                           <property name="anchor">nw</property>
                           <property name="height">28</property>
+                          <property name="width">37</property>
                           <property name="x">42</property>
                           <property name="y">1</property>
                         </layout>
@@ -274,6 +276,7 @@
                         <layout manager="place">
                           <property name="anchor">nw</property>
                           <property name="height">28</property>
+                          <property name="width">37</property>
                           <property name="x">83</property>
                           <property name="y">1</property>
                         </layout>
@@ -292,6 +295,7 @@
                         <layout manager="place">
                           <property name="anchor">nw</property>
                           <property name="height">28</property>
+                          <property name="width">37</property>
                           <property name="x">120</property>
                           <property name="y">1</property>
                         </layout>
