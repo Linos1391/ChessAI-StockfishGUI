@@ -44,7 +44,7 @@
 
 ## Tính năng
 
-#### Đến [Change Log](CHANGELOG.md).
+#### Đến [Change Log](CHANGELOG-vi.md).
 
 #### Tính năng mới (v0.1.2):
 
