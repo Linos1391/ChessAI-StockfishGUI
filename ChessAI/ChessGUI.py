@@ -3,7 +3,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import pygubu
 from PIL import Image, ImageTk
-import os
+import sys
 import json
 from idlelib.tooltip import Hovertip
 from ChessEngine import Engine
@@ -206,7 +206,7 @@ class ChessGUIApp:
         """
         
         panel = self.builder.get_object(parent_id)
-        fpath = os.path.join(path, img_name)
+        fpath = path / img_name
         aux = Image.open(fpath)
         
         # avoid to be deleted. Image will be saved at self.id
@@ -1000,6 +1000,7 @@ class ChessGUIApp:
     def setting_update_data(self):
         data = {
             "ChessAI": {
+                "Engine": self.engine.data['ChessAI']['Engine'],
                 "Analyse Every Move": True if self.builder.tkvariables['Entry_ChessAI_Analyse_Every_Move'].get() == 'True' else False,
                 "Elo": self.builder.tkvariables['engine_elo'].get(),
             },             
@@ -1012,12 +1013,28 @@ class ChessGUIApp:
             },
         }
         
-        with open("setting.json", mode="w", encoding="utf-8") as write_file:
+        with open("setting.json" if getattr(sys, "frozen", False) else PROJECT_PATH / 'setting.json', mode="w", encoding="utf-8") as write_file:
             json.dump(data, write_file, indent=4)
             write_file.close()
             
         self.engine.data = data
         
+    def setting_warning(self, event: object) -> None:
+        def check(object_name: str, correct_answer: str | int) -> None:
+            if self.builder.tkvariables[f'Entry_{object_name}'].get() == correct_answer:
+                setattr(self, object_name, tk.PhotoImage(file=PROJECT_PATH / 'GUI/empty.png'))
+            else:
+                setattr(self, object_name, tk.PhotoImage(file=PROJECT_PATH / 'GUI/warning.png'))
+                
+            self.builder.get_object(f'Warning_{object_name}').config(image=getattr(self, object_name))
+            
+        check('ChessAI_Analyse_Every_Move', str(self.engine.data['ChessAI']['Analyse Every Move']))
+        check('Stockfish_Debug_Log_File', self.engine.data['Stockfish']['Debug Log File'])
+        check('Stockfish_UCI_Chess960', str(self.engine.data['Stockfish']['UCI_Chess960']))
+        check('Stockfish_Min_Split_Depth', self.engine.data['Stockfish']['Min Split Depth'])
+        check('Stockfish_Threads', self.engine.data['Stockfish']['Threads'])
+        check('Stockfish_Hash', self.engine.data['Stockfish']['Hash'])
+
 
 
 if __name__ == '__main__':
