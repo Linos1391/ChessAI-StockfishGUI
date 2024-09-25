@@ -44,13 +44,13 @@
 
 ## Tính năng
 
-#### Đến [Change Log](CHANGELOG-vi.md).
-
 #### Tính năng mới (v0.1.2):
 
 - Hiển thị phần sửa đổi ở tab 'Settings'.
 
 ![feature_6](assets/features_6.gif)
+
+#### Để xem những tính năng cũ, vào [Change Log](CHANGELOG-vi.md).
 
 ## Tải xuống
 
