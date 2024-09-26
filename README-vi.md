@@ -54,7 +54,7 @@
 
 ## Tải xuống
 
-#### Lựa chọn 1: Tải [file .exe](https://github.com/Linos1391/ChessAI/releases) 
+#### Lựa chọn 1: Tải [file .exe](https://github.com/Linos1391/ChessAI/releases).
 
 #### Lựa chon 2: Tải thủ công thông qua Github:
 
