@@ -78,7 +78,7 @@ pip install -r requirements.txt
 ```
 {
     "ChessAI": {
-        "Engine": "", <-- Put your Stockfish path here (.exe)
+        "Engine": "", <-- Put your Stockfish path here (Execute file)
         "Analyse Every Move": false,
         "Elo": 1350
     },
