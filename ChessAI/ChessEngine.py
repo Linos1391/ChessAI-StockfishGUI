@@ -1,10 +1,22 @@
 from stockfish.models import Stockfish
 
+# R.I.P the legend himself o7
+class ModifiedStockfish(Stockfish):        
+    def _put(self, command: str) -> None:
+        if not self._stockfish.stdin:
+            raise BrokenPipeError()
+        if self._stockfish.poll() is None and not self._has_quit_command_been_sent:
+            print(command)
+            self._stockfish.stdin.write(f"{command}\n")
+            self._stockfish.stdin.flush()
+            if command == "quit":
+                self._has_quit_command_been_sent = True
+
 class Engine:
     def __init__(self, data):
         self.data = data
         
-        self.engine: Stockfish = Stockfish(self.data['ChessAI']['Engine'], parameters={'UCI_LimitStrength': True})
+        self.engine: object = ModifiedStockfish(self.data['ChessAI']['Engine'], parameters={'UCI_LimitStrength': True})
 
         self.engine.update_engine_parameters(self.data['Stockfish'])
 
