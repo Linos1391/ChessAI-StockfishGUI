@@ -54,9 +54,9 @@
                     <property name="width">100</property>
                     <layout manager="place">
                       <property name="anchor">nw</property>
-                      <property name="height">255</property>
-                      <property name="width">52</property>
-                      <property name="x">0</property>
+                      <property name="height">227</property>
+                      <property name="width">54</property>
+                      <property name="x">1</property>
                       <property name="y">10</property>
                     </layout>
                     <child>
@@ -307,9 +307,9 @@
                         <property name="image">flip.png</property>
                         <property name="relief">raised</property>
                         <property name="text" translatable="yes">label1</property>
-                        <bind sequence="&lt;Button-1&gt;" handler="FEN_flip_click" add="True" />
+                        <bind sequence="&lt;Button-1&gt;" handler="object_click" add="True" />
                         <bind sequence="&lt;ButtonPress-1&gt;" handler="FEN_flip" add="True" />
-                        <bind sequence="&lt;ButtonRelease-1&gt;" handler="FEN_flip_unclick" add="True" />
+                        <bind sequence="&lt;ButtonRelease-1&gt;" handler="object_unclick" add="True" />
                         <layout manager="place">
                           <property name="anchor">nw</property>
                           <property name="height">28</property>
@@ -498,6 +498,52 @@
                             </layout>
                           </object>
                         </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame10">
+                    <property name="height">200</property>
+                    <property name="relief">sunken</property>
+                    <property name="width">200</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">28</property>
+                      <property name="width">54</property>
+                      <property name="x">1</property>
+                      <property name="y">240</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Label" id="undo" named="True">
+                        <property name="image">undo.png</property>
+                        <property name="text" translatable="yes">label1</property>
+                        <bind sequence="&lt;Button-1&gt;" handler="board_undo" add="True" />
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="object_click" add="True" />
+                        <bind sequence="&lt;ButtonRelease-1&gt;" handler="object_unclick" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">26</property>
+                          <property name="width">26</property>
+                          <property name="x">1</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="redo" named="True">
+                        <property name="image">redo.png</property>
+                        <property name="text" translatable="yes">label3</property>
+                        <bind sequence="&lt;Button-1&gt;" handler="board_redo" add="True" />
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="object_click" add="True" />
+                        <bind sequence="&lt;ButtonRelease-1&gt;" handler="object_unclick" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">26</property>
+                          <property name="width">26</property>
+                          <property name="x">26</property>
+                          <property name="y">1</property>
+                        </layout>
                       </object>
                     </child>
                   </object>
