@@ -44,11 +44,11 @@
 
 ## Tính năng
 
-#### Tính năng mới (v0.1.2):
+#### Tính năng mới (v0.1.3):
 
-- Hiển thị phần sửa đổi ở tab 'Settings'.
+- Có thể 'đi lại' và 'đi lại quá trình đi lại' nước cờ.
 
-![feature_6](assets/features_6.gif)
+![feature_7](assets/features_7.gif)
 
 #### Để xem những tính năng cũ, vào [Change Log](CHANGELOG-vi.md).
 
