@@ -1,3 +1,9 @@
+#### v0.1.3
+
+- Changed setting is visible.
+
+![feature_6](assets/features_6.gif)
+
 #### v0.1.2
 
 - Changed setting is visible.
