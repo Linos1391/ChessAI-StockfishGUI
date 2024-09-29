@@ -1,3 +1,9 @@
+#### v0.1.3
+
+- Có thể 'đi lại' và 'đi lại quá trình đi lại' nước cờ.
+
+![feature_7](assets/features_7.gif)
+
 #### v0.1.2
 
 - Hiển thị phần sửa đổi ở tab 'Settings'.
