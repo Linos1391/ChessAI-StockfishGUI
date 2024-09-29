@@ -4,6 +4,7 @@ import tkinter.ttk as ttk
 import pygubu
 from PIL import Image, ImageTk
 import sys
+import os
 import json
 from idlelib.tooltip import Hovertip
 from ChessEngine import Engine
@@ -105,6 +106,7 @@ class ChessGUIApp:
         builder.add_from_file(PROJECT_UI)
 
         self.mainwindow = builder.get_object('title', master)
+        self.mainwindow.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.advance_dialog = self.builder.get_object('advance', self.mainwindow)
         builder.connect_callbacks(self)
 
@@ -178,7 +180,7 @@ class ChessGUIApp:
         Tooltip(self.Q, "If white can castle queen side")
         Tooltip(self.k, "If black can castle king side")
         Tooltip(self.q, "If black can castle queen side")
-        Tooltip(self.builder.get_object('flip'), "Flip the board (WIP, sometimes it got errors)")
+        Tooltip(self.builder.get_object('flip'), "Flip the board")
         Tooltip(self.builder.get_object('white_side'), "Change to white's turn")
         Tooltip(self.builder.get_object('black_side'), "Change to black's turn")
         Tooltip(self.builder.get_object('stat_type'), "'cp': centipawn (already convert), 'mate': checkmate in")
@@ -190,6 +192,8 @@ class ChessGUIApp:
         Tooltip(self.builder.get_object('top1'), "Get the first best move (from here to there)")
         Tooltip(self.builder.get_object('top2'), "Get the second best move (from here to there)")
         Tooltip(self.builder.get_object('deselect'), "Remove a piece from chessboard")
+        Tooltip(self.builder.get_object('undo'), "Undo the move on the chessboard")
+        Tooltip(self.builder.get_object('redo'), "Redo the move on the chessboard")
          
     def update_image(
         self,
@@ -642,6 +646,7 @@ class ChessGUIApp:
             last_move: str = f'{ALPHABET_DICT[str(last_x)]}{8 - last_y}'
             move: str = f'{ALPHABET_DICT[str(x)]}{8 - y}'
         
+        # for pawn promotion
         if self.board[last_y][last_x].lower() == 'p' and ((self.forward and y == 0) or (not self.forward and y == 7)):
             self.advance_dialog.show()
             self.mainwindow.wait_variable(self.advance_key)
@@ -691,7 +696,12 @@ class ChessGUIApp:
             self.move = None
         self.builder.get_object('top1').config(relief='flat', background='')
         self.builder.get_object('top2').config(relief='flat', background='')
-             
+
+    def on_closing(self):
+        if os.path.isfile(PROJECT_PATH / 'history.json'):
+            os.remove(PROJECT_PATH / 'history.json')
+        self.mainwindow.destroy()
+    
     # +------------------------------------------------+
     # | event handler                                  |
     # +------------------------------------------------+
@@ -780,6 +790,13 @@ class ChessGUIApp:
         else:
             self.move_piece(self.move_last[0], self.move_last[1], locX, locY)
 
+    # up and release effect:
+    def object_click(self, event: object) -> None:
+        event.widget.config(background='#888888')
+
+    def object_unclick(self, event: object) -> None:
+        event.widget.config(background='')
+
     # FEN config
     def FEN_castle(self, event: object) -> None:
         name = event.widget._name
@@ -814,12 +831,6 @@ class ChessGUIApp:
         panel.create_image(0, 0, image=self.chessboard, anchor="nw")
     
         self.update_chessboard()
-                
-    def FEN_flip_click(self, event: object) -> None:
-        event.widget.config(background='#888888')
-
-    def FEN_flip_unclick(self, event: object) -> None:
-        event.widget.config(background='')
         
     def FEN_white_side(self, event: object) -> None:
         if not self.is_black:
@@ -938,12 +949,97 @@ class ChessGUIApp:
             y: int = 32 * (8.5 - int(text[3]))
             
         self.move = self.builder.get_object('chessboard').create_line(last_x, last_y, x, y, arrow=tk.LAST)
-        
+    
+    # when the pawn reach the end
     def advance_submit(self) -> None:
         self.advance_key.set(self.builder.get_variable('advance_key').get())
         if self.advance_key == '':
             return
         self.builder.get_object('advance', self.mainwindow).close()
+
+    # Undo and redo with history
+    def board_undo(self, event: object):
+        
+        with open(PROJECT_PATH / 'history.json', mode="r", encoding="utf-8") as read_file:
+            data: dict = json.load(read_file)
+            read_file.close()
+        
+        self.engine.current_move -= 1
+        
+        if self.engine.current_move == -1:
+            self.engine.current_move = 0
+            return
+        
+        if self.engine.current_move == len(data) - 1:
+            self.engine.current_move = len(data)
+            return
+            
+        self.FEN = data[str(self.engine.current_move)]['fen']
+        self.engine.engine.set_fen_position(self.FEN)
+        self.update_chessboard()
+        
+        sliced_FEN: tuple[str] = self.FEN.split(' ')
+        
+        if sliced_FEN[1] == 'w':
+            self.builder.get_object('white_side').config(background='#888888')
+            self.builder.get_object('black_side').config(background='')
+            self.is_black = False
+        if sliced_FEN[1] == 'b':
+            self.builder.get_object('white_side').config(background='')
+            self.builder.get_object('black_side').config(background='#888888')
+            self.is_black = True
+            
+        for p in ('K', 'Q', 'k', 'q'):
+            self.builder.get_object(f'castle_{FEN_DICT[p][:-4]}').deselect()
+            
+        for p in sliced_FEN[2]:
+            if p == '-':
+                break
+            self.builder.get_object(f'castle_{FEN_DICT[p][:-4]}').select()
+        
+        self.builder.tkvariables['engine_halfmove'].set(sliced_FEN[4])
+        self.builder.tkvariables['engine_fullmove'].set(sliced_FEN[5])
+    
+    def board_redo(self, event: object):    
+        with open(PROJECT_PATH / 'history.json', mode="r", encoding="utf-8") as read_file:
+            data: dict = json.load(read_file)
+            read_file.close()
+        
+        self.engine.current_move += 1
+        
+        if self.engine.current_move == -1:
+            self.engine.current_move = 0
+            return
+        
+        if self.engine.current_move == len(data):
+            self.engine.current_move = len(data) - 1
+            return
+            
+        self.FEN = data[str(self.engine.current_move)]['fen']
+        self.engine.engine.set_fen_position(self.FEN)
+        self.update_chessboard()
+        
+        sliced_FEN: tuple[str] = self.FEN.split(' ')
+        
+        if sliced_FEN[1] == 'w':
+            self.builder.get_object('white_side').config(background='#888888')
+            self.builder.get_object('black_side').config(background='')
+            self.is_black = False
+        if sliced_FEN[1] == 'b':
+            self.builder.get_object('white_side').config(background='')
+            self.builder.get_object('black_side').config(background='#888888')
+            self.is_black = True
+            
+        for p in ('K', 'Q', 'k', 'q'):
+            self.builder.get_object(f'castle_{FEN_DICT[p][:-4]}').deselect()
+            
+        for p in sliced_FEN[2]:
+            if p == '-':
+                break
+            self.builder.get_object(f'castle_{FEN_DICT[p][:-4]}').select()
+        
+        self.builder.tkvariables['engine_halfmove'].set(sliced_FEN[4])
+        self.builder.tkvariables['engine_fullmove'].set(sliced_FEN[5])
 
     # +------------------------------------------------+
     # | vision handler                                 |
