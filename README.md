@@ -11,7 +11,7 @@
 [![][conda-shield]][conda-url]
 [![][stockfish-shield]][stockfish-url]
 
-[chessai-shield]: https://img.shields.io/badge/ChessAI-0.1.2-red
+[chessai-shield]: https://img.shields.io/badge/ChessAI-0.1.3-red
 [chessai-url]: https://github.com/Linos1391/ChessAI
 [python-shield]: https://img.shields.io/badge/Python-3.12+-yellow
 [python-url]: https://www.python.org/downloads/
@@ -44,11 +44,11 @@ This application will help you analyse chess position as a sub-window.
 
 ## Features
 
-#### New feature (v0.1.2):
+#### New feature (v0.1.3):
 
-- Changed setting is visible.
+- Able to undo and redo move on chessboard.
 
-![feature_6](assets/features_6.gif)
+![feature_7](assets/features_7.gif)
 
 #### For old features, visit [Change Log](CHANGELOG.md).
 
