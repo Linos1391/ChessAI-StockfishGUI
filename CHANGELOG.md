@@ -1,8 +1,8 @@
 #### v0.1.3
 
-- Changed setting is visible.
+- Able to undo and redo move on chessboard.
 
-![feature_6](assets/features_6.gif)
+![feature_7](assets/features_7.gif)
 
 #### v0.1.2
 
