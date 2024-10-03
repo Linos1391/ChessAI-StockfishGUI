@@ -11,13 +11,13 @@
 [![][conda-shield]][conda-url]
 [![][stockfish-shield]][stockfish-url]
 
-[chessai-shield]: https://img.shields.io/badge/ChessAI-0.1.3-red?style=for-the-badge
+[chessai-shield]: https://img.shields.io/badge/ChessAI-0.1.3-red
 [chessai-url]: https://github.com/Linos1391/ChessAI
-[python-shield]: https://img.shields.io/badge/Python-3.12+-yellow?style=for-the-badge
+[python-shield]: https://img.shields.io/badge/Python-3.12+-yellow
 [python-url]: https://www.python.org/downloads/
-[conda-shield]: https://img.shields.io/badge/Anaconda-24.7+-grass?style=for-the-badge
+[conda-shield]: https://img.shields.io/badge/Anaconda-24.7+-grass
 [conda-url]: https://www.anaconda.com/download
-[stockfish-shield]: https://img.shields.io/badge/Stockfish-16+-green?style=for-the-badge
+[stockfish-shield]: https://img.shields.io/badge/Stockfish-16+-green
 [stockfish-url]: https://stockfishchess.org/download/
 
 ![Icon](assets/Icon128.png)
