@@ -2,7 +2,8 @@
     "ChessAI": {
         "Engine": "",
         "Analyse Every Move": false,
-        "Elo": 1350
+        "Elo": 1350,
+        "Current Template": "Chesscom"
     },
     "Stockfish": {
         "Debug Log File": "",
