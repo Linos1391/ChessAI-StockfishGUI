@@ -1,15 +1,17 @@
 import pathlib
+import sys
+import os
+import shutil
 import tkinter as tk
 import tkinter.ttk as ttk
 import pygubu
 from PIL import Image, ImageTk
-import sys
-import os
 import json
 from idlelib.tooltip import Hovertip
 from ChessEngine import Engine
+import ChessVision
 
-#TODO: For safety... don't read it. It just randomly works.
+# For safety... don't read it. It just randomly works.
 
 PROJECT_PATH: str = pathlib.Path(__file__).parent
 PROJECT_UI: str = PROJECT_PATH / "ChessGUI.ui"
@@ -97,7 +99,7 @@ class ChessGUIApp:
     move = None
     forward = True
     
-    def __init__(self,data: dict, master=None):
+    def __init__(self, data: dict, master=None):
         self.engine = Engine(data=data)
         
         self.builder = builder = pygubu.Builder()
@@ -108,10 +110,17 @@ class ChessGUIApp:
         self.mainwindow = builder.get_object('title', master)
         self.mainwindow.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.advance_dialog = self.builder.get_object('advance', self.mainwindow)
+        self.cropping_dialog = self.builder.get_object('cropping', self.mainwindow)
+        self.warning_dialog = self.builder.get_object('warning', self.mainwindow)
+        self.delete_dialog = self.builder.get_object('delete', self.mainwindow)
+        self.template_dialog = self.builder.get_object('template', self.mainwindow)
         builder.connect_callbacks(self)
 
         self.mainwindow.wm_attributes('-topmost', True)
         self.advance_dialog.toplevel.wm_attributes('-topmost', True)
+        self.cropping_dialog.toplevel.wm_attributes('-topmost', True)
+        self.delete_dialog.toplevel.wm_attributes('-topmost', True)
+        self.template_dialog.toplevel.wm_attributes('-topmost', True)
         self.builder.get_object('warning', self.mainwindow).toplevel.wm_attributes('-topmost', True)
         self.theme = ttk.Style()
         self.theme.theme_use('default')
@@ -130,14 +139,19 @@ class ChessGUIApp:
     def run(self) -> None:
         self.mainwindow.mainloop()
         
-    def set_FEN(self) -> None:        
+    def set_FEN(self) -> None:
+        self.engine.restart_engine()    
         self.engine.engine.set_fen_position(self.FEN)
         
-    def warning(self) -> None:
+    def warning(self, first_warning: bool = True) -> None:
         """
-        Prevent Stockfish from crashing. I swear some idiots will try to play with 2 kings.
+        Show warning
         """
-        self.builder.get_object('warning', self.mainwindow).show()
+        if first_warning:
+            self.builder.get_object('warning_message').config(text='There must be 1 king each side.')
+        else:
+            self.builder.get_object('warning_message').config(text='Please crop better or choose\nanother file / screenshot again.')
+        self.warning_dialog.show()
         
     # +------------------------------------------------+
     # | some sub-function                              |
@@ -213,7 +227,7 @@ class ChessGUIApp:
         fpath = path / img_name
         aux = Image.open(fpath)
         
-        # avoid to be deleted. Image will be saved at self.id
+        # avoid to be deleted. Image will be saved at self.widget_id
         setattr(self, widget_id, ImageTk.PhotoImage(aux))
         panel.create_image(x, y, image=getattr(self, widget_id), anchor="nw")
 
@@ -795,7 +809,7 @@ class ChessGUIApp:
         event.widget.config(background='#888888')
 
     def object_unclick(self, event: object) -> None:
-        event.widget.config(background='')
+        event.widget.config(background='#d9d9d9')
 
     # FEN config
     def FEN_castle(self, event: object) -> None:
@@ -975,7 +989,7 @@ class ChessGUIApp:
             return
             
         self.FEN = data[str(self.engine.current_move)]['fen']
-        self.engine.engine.set_fen_position(self.FEN)
+        self.set_FEN()
         self.update_chessboard()
         
         sliced_FEN: tuple[str] = self.FEN.split(' ')
@@ -1016,7 +1030,7 @@ class ChessGUIApp:
             return
             
         self.FEN = data[str(self.engine.current_move)]['fen']
-        self.engine.engine.set_fen_position(self.FEN)
+        self.set_FEN()
         self.update_chessboard()
         
         sliced_FEN: tuple[str] = self.FEN.split(' ')
@@ -1049,9 +1063,285 @@ class ChessGUIApp:
         """
         __init__ for the Vision tab
         """
-        pass
-    # Coming soon
+        
+        self.vision_tooltip()
+        
+        self.vision_check_templates()
+        
+        self.vision_black_side: bool = False
+        self.vision_crop_rect = None
+        self.crop_for_analyse = None
+        
+    def vision_choose(self, event: object):
+        template = event.widget._name[7:]
+        
+        if self.engine.data['ChessAI']['Current Template'] == template:
+            return
+        
+        self.engine.data['ChessAI']['Current Template'] = template
+        with open("setting.json" if getattr(sys, "frozen", False) else PROJECT_PATH / 'setting.json', mode="w", encoding="utf-8") as write_file:
+            json.dump(self.engine.data, write_file, indent=4)
+            write_file.close()
+        
+        ChessVision._update_template_path(template)
     
+    def vision_add(self):
+        self.template_dialog.show()
+    
+    def vision_add_screenshot(self):
+        self.template_dialog.close()
+
+        ChessVision._screenshot()
+        self.crop_for_analyse = False
+        self.vision_crop()
+    
+    def vision_add_choose_file(self, event: object):
+        self.template_dialog.close()
+
+        img = Image.open(event.widget.cget(key="path"))
+        img.save(ChessVision.ANALYSE_PATH)
+        self.crop_for_analyse = False
+        self.vision_crop()
+    
+    def vision_delete_ask(self, event: object):
+        self.delete_template = event.widget._name[7:]
+        self.delete_dialog.show()
+    
+    def vision_delete(self):
+        self.delete_dialog.close()
+        
+        if self.delete_template is None:
+            return
+
+        shutil.rmtree(os.path.join(PROJECT_PATH, 'Templates', self.delete_template))
+        self.delete_template = None
+        
+        self.vision_check_templates()  
+        
+    def vision_check_templates(self):
+        # Only some are valid
+        templates: tuple = ChessVision.count_templates()
+        
+        no_templates_left: bool = False
+        if len(templates) == 0:
+            no_templates_left = True
+        panel = self.builder.get_object('vision_templates')
+        
+        # destroy previous panel
+        for widget in panel.innerframe.winfo_children():
+            widget.destroy()
+        
+        if not no_templates_left:
+            
+            chosen_template = templates[0]
+            _current_template = self.engine.data['ChessAI']['Current Template'] 
+            if _current_template != "" and _current_template in templates:
+                chosen_template = _current_template
+            del _current_template # Im a beginner, just a practise.
+            
+            for index, template in enumerate(templates):  
+                frame = ttk.Frame(master=panel.innerframe, height=76, width=316, relief='raised')
+                frame.pack(padx=1, pady=1)
+                
+                # for chessboard templates:
+                chessboard = Image.open(os.path.join(PROJECT_PATH, 'Templates', template, 'Chessboard.png'))
+                chessboard = chessboard.resize((70, 70))
+                setattr(self, f'vision_item{index+1}_chessboard', ImageTk.PhotoImage(chessboard))
+                chessboard = tk.Label(master=frame, image=getattr(self, f'vision_item{index+1}_chessboard'), background='#d9d9d9')
+                chessboard.place(x=2, y=2, width=72, height=72)
+                
+                # for template's name:
+                label = tk.Label(master=frame, text=template, width=14, background='#d9d9d9', wraplength=130)
+                label.place(x=80, y=23)
+                
+                # for choose button:        
+                if template == chosen_template:
+                    choose_option = Image.open(os.path.join(PROJECT_PATH, 'GUI', 'vision_choose.png'))
+                else:
+                    choose_option = Image.open(os.path.join(PROJECT_PATH, 'GUI', 'vision_unchoose.png'))
+                
+                setattr(self, f'vision_item{index+1}_choose', ImageTk.PhotoImage(choose_option))
+                choose_option = tk.Label(master=frame, name=f'choose_{template}', image=getattr(self, f'vision_item{index+1}_choose'), background='#d9d9d9')
+                choose_option.bind('<ButtonPress-1>', self.vision_choose)
+                Tooltip(choose_option, 'Click to select template')
+                choose_option.place(x=230, y=21, width=34, height=34)
+                
+                # for delete button
+                delete = Image.open(os.path.join(PROJECT_PATH, 'GUI', 'deselect.png'))
+                setattr(self, f'vision_item{index+1}_delete', ImageTk.PhotoImage(delete))
+                delete = tk.Label(master=frame, name=f'delete_{template}', image=getattr(self, f'vision_item{index+1}_delete'), background='#d9d9d9')
+                delete.bind('<ButtonPress-1>', self.vision_delete_ask)
+                Tooltip(delete, 'Click to delete template')
+                delete.place(x=270, y=21, width=34, height=34)
+                
+        add = Image.open(os.path.join(PROJECT_PATH, 'GUI', 'vision_add.png'))
+        self.vision_add_image = ImageTk.PhotoImage(add)
+        add = ttk.Button(master=panel.innerframe, image=self.vision_add_image, command=self.vision_add)
+        Tooltip(add, 'Click to add custom template')
+        add.pack(padx=1, fill='x')
+
+    def vision_tooltip(self):
+        Tooltip(self.builder.get_object('Vision_side'), 'Change the side (User are black or white)')
+    
+    def vision_side(self, event: object):
+        if self.vision_black_side:
+            self.vision_side_image = ImageTk.PhotoImage(Image.open(os.path.join(PROJECT_PATH, 'GUI', 'vision_white.png')))
+            self.vision_black_side = False
+        else:
+            self.vision_side_image = ImageTk.PhotoImage(Image.open(os.path.join(PROJECT_PATH, 'GUI', 'vision_black.png')))
+            self.vision_black_side = True
+        self.builder.get_object('Vision_side').config(image=self.vision_side_image)
+    
+    def vision_screenshot(self):
+        ChessVision._screenshot()
+        self.crop_for_analyse = True
+        self.vision_crop()
+    
+    def vision_choose_file(self, event: object):
+        img = Image.open(event.widget.cget(key="path"))
+        img.save(ChessVision.ANALYSE_PATH)
+        self.crop_for_analyse = True
+        self.vision_crop()
+        
+    def vision_crop(self):
+        img = Image.open(ChessVision.ANALYSE_PATH)
+        self.vision_original_width, self.vision_original_height = img.size
+        
+        width = int(self.vision_original_width * 200 / self.vision_original_height)
+        
+        img = img.resize((width, 200))
+        self.vision_crop_canva = ImageTk.PhotoImage(img)
+        
+        self.builder.tkvariables['vision_var_width'].set(self.vision_original_width)
+        self.builder.tkvariables['vision_var_height'].set(self.vision_original_height)
+        self.builder.get_object('vision_crop').config(width = width)
+        self.builder.get_object('vision_crop').create_image(0, 0, image=self.vision_crop_canva, anchor="nw")
+        self.vision_crop_image()
+        self.cropping_dialog.show()
+        
+    def vision_crop_image(self):
+        # 1 <= vision_x < self.vision_width
+        vision_x: int = self.builder.tkvariables['vision_var_x']
+        if vision_x.get() >= self.vision_original_width:
+            x = int((self.vision_original_width-1) * 200 / self.vision_original_height)
+            vision_x.set(self.vision_original_width - 1)
+        elif vision_x.get() < 1:
+            x = 0
+            vision_x.set(1)
+        else:    
+            x = int(vision_x.get() * 200 / self.vision_original_height)
+        
+        # 1 <= vision_y < self.vision_height
+        vision_y: int = self.builder.tkvariables['vision_var_y']
+        if vision_y.get() >= self.vision_original_height:
+            y = int((self.vision_height-1) * 200 / self.vision_original_height)
+            vision_y.set(self.vision_original_height - 1)
+        elif vision_y.get() < 1:
+            y = 0
+            vision_y.set(1)
+        else:    
+            y = int(vision_y.get() * 200 / self.vision_original_height)
+        
+        # vision_x < vision_width+vision_x <= self.vision_width
+        vision_width: int = self.builder.tkvariables['vision_var_width']
+        if vision_width.get() + x > self.vision_original_width:
+            width = int((self.vision_original_width-vision_x.get()) * 200 / self.vision_original_height)
+            vision_width.set(self.vision_original_width - vision_x.get())
+        elif vision_width.get() < 1:
+            width = 1
+            vision_width.set(1)
+        else:    
+            width = int(vision_width.get() * 200 / self.vision_original_height)
+        
+        # vision_y < vision_height+vision_y <= self.vision_height
+        vision_height: int = self.builder.tkvariables['vision_var_height']
+        if vision_height.get() + y > self.vision_original_height:
+            height = 200
+            vision_height.set(self.vision_original_height - vision_y.get())
+        elif vision_height.get() < 1:
+            height = 1
+            vision_height.set(1)
+        else:    
+            height = int(vision_height.get() * 200 / self.vision_original_height)
+        
+        if self.vision_crop_rect is not None:
+            self.builder.get_object('vision_crop').delete(self.vision_crop_rect)
+            self.vision_crop_rect = None
+        
+        self.vision_x: int = vision_x.get()
+        self.vision_y: int = vision_y.get()
+        self.vision_width: int = vision_width.get()
+        self.vision_height: int = vision_height.get()
+        
+        self.vision_crop_rect = self.builder.get_object('vision_crop').create_rectangle(x, y, x+width-1, y+height-1, outline='red')
+    
+    def vision_crop_submit(self):
+        self.cropping_dialog.close()
+        
+        img = Image.open(ChessVision.ANALYSE_PATH)
+        img = img.crop((self.vision_x, self.vision_y, self.vision_x+self.vision_width, self.vision_x+self.vision_height))
+        try:
+            ChessVision.make_chessboard_template(img, analyse=self.crop_for_analyse)
+        except:
+            self.warning(False)
+            return
+        
+        if self.crop_for_analyse:   
+            img = Image.open(ChessVision.ANALYSE_PATH)
+            
+            try:
+                self.board = ChessVision.analyse_chess_pieces(img)
+            except:
+                self.warning(False)
+                return
+
+            self.FEN = self.board_to_FEN(self.board)
+            self.set_FEN()
+            self.update_chessboard()
+
+            if self.vision_black_side:
+                self.builder.get_object('black_side').config(background='#888888')
+                self.builder.get_object('white_side').config(background='')
+                self.is_black = True
+
+                sliced_FEN: tuple[str] = self.FEN.split(" ", 2)
+                sliced_FEN[1] = 'b'
+                self.FEN = ' '.join(sliced_FEN)
+                self.set_FEN()
+            else:
+                self.builder.get_object('white_side').config(background='#888888')
+                self.builder.get_object('black_side').config(background='')
+                self.is_black = False
+
+                sliced_FEN: tuple[str] = self.FEN.split(" ", 2)
+                sliced_FEN[1] = 'w'
+                self.FEN = ' '.join(sliced_FEN)
+                self.set_FEN()
+                
+        else:
+            name = self.builder.tkvariables['template_name'].get()
+            
+            if name == '':
+                name = 'Untitled'
+            try:
+                os.mkdir(os.path.join(PROJECT_PATH, 'Templates', name))
+            except:
+                pass # maybe you created it then
+            
+            ChessVision.TEMPLATE_PATH = ChessVision._update_template_path(name)
+            
+            img = Image.open(ChessVision.TEMPLATE_PATH / 'Chessboard.png')
+            try:
+                ChessVision.make_chesspiece_template(img)
+            except:
+                self.warning(False)
+                return
+            
+            self.vision_check_templates()
+        
+        self.crop_for_analyse = None
+        os.remove(ChessVision.ANALYSE_PATH)
+         
     # +------------------------------------------------+
     # | setting handler                                |
     # +------------------------------------------------+
@@ -1062,6 +1352,8 @@ class ChessGUIApp:
         """
         
         self.setting_tooltip()
+        
+        self.setting_warning()
         
         self.builder.tkvariables['Entry_ChessAI_Analyse_Every_Move'].set(str(self.engine.data['ChessAI']['Analyse Every Move']))
         self.builder.get_object('Stockfish_Debug_Log_File').config(path=self.engine.data['Stockfish']['Debug Log File'])
@@ -1099,6 +1391,7 @@ class ChessGUIApp:
                 "Engine": self.engine.data['ChessAI']['Engine'],
                 "Analyse Every Move": True if self.builder.tkvariables['Entry_ChessAI_Analyse_Every_Move'].get() == 'True' else False,
                 "Elo": self.builder.tkvariables['engine_elo'].get(),
+                "Current Template": self.engine.data['ChessAI']['Current Template'],
             },             
             "Stockfish": {
                 "Debug Log File": self.builder.tkvariables['Entry_Stockfish_Debug_Log_File'].get(),
@@ -1115,11 +1408,15 @@ class ChessGUIApp:
             
         self.engine.data = data
         
-    def setting_warning(self, event: object) -> None:
+    def setting_warning(self) -> None:
         def check(object_name: str, correct_answer: str | int) -> None:
-            if self.builder.tkvariables[f'Entry_{object_name}'].get() == correct_answer:
-                setattr(self, object_name, tk.PhotoImage(file=PROJECT_PATH / 'GUI/empty.png'))
-            else:
+            try:
+                answer = self.builder.tkvariables[f'Entry_{object_name}'].get()
+                if answer == correct_answer:
+                    setattr(self, object_name, tk.PhotoImage(file=PROJECT_PATH / 'GUI/empty.png'))
+                else:
+                    setattr(self, object_name, tk.PhotoImage(file=PROJECT_PATH / 'GUI/warning.png'))
+            except:
                 setattr(self, object_name, tk.PhotoImage(file=PROJECT_PATH / 'GUI/warning.png'))
                 
             self.builder.get_object(f'Warning_{object_name}').config(image=getattr(self, object_name))
@@ -1130,8 +1427,8 @@ class ChessGUIApp:
         check('Stockfish_Min_Split_Depth', self.engine.data['Stockfish']['Min Split Depth'])
         check('Stockfish_Threads', self.engine.data['Stockfish']['Threads'])
         check('Stockfish_Hash', self.engine.data['Stockfish']['Hash'])
-
-
+        
+        self.mainwindow.after(100, self.setting_warning)
 
 if __name__ == '__main__':
     print('Use "main.py" dude')
