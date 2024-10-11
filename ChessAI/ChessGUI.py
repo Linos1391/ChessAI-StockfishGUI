@@ -1296,6 +1296,29 @@ class ChessGUIApp:
                 return
 
             self.FEN = self.board_to_FEN(self.board)
+            
+            try:
+                with open(PROJECT_PATH / 'history.json', mode="r", encoding="utf-8") as read_file:
+                    existed_data: dict = json.load(read_file)
+                    read_file.close()
+            except:
+                raise Exception('Cannot access history.json file')
+
+            data: dict = {
+                str(self.engine.current_move): {
+                    "fen": self.FEN
+                }
+            }
+            
+            for id in range(self.engine.current_move, len(existed_data)):
+                existed_data.pop(str(id))
+
+            existed_data.update(data)
+
+            with open(PROJECT_PATH / 'history.json', mode="w", encoding="utf-8") as write_file:
+                json.dump(existed_data, write_file, indent=4)
+                write_file.close()
+
             self.set_FEN()
             self.update_chessboard()
 
@@ -1429,6 +1452,8 @@ class ChessGUIApp:
         check('Stockfish_Hash', self.engine.data['Stockfish']['Hash'])
         
         self.mainwindow.after(100, self.setting_warning)
+
+
 
 if __name__ == '__main__':
     print('Use "main.py" dude')
