@@ -1083,7 +1083,9 @@ class ChessGUIApp:
             json.dump(self.engine.data, write_file, indent=4)
             write_file.close()
         
-        ChessVision._update_template_path(template)
+        ChessVision.TEMPLATE_PATH = ChessVision._update_template_path(template)
+        
+        self.vision_check_templates()
     
     def vision_add(self):
         self.template_dialog.show()
@@ -1280,7 +1282,7 @@ class ChessGUIApp:
         
         img = Image.open(ChessVision.ANALYSE_PATH)
         img = img.crop((self.vision_x, self.vision_y, self.vision_x+self.vision_width, self.vision_x+self.vision_height))
-        print(ChessVision.TEMPLATE_PATH)
+
         try:
             ChessVision.make_chessboard_template(img, self.crop_for_analyse)
         except:
