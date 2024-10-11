@@ -1280,8 +1280,9 @@ class ChessGUIApp:
         
         img = Image.open(ChessVision.ANALYSE_PATH)
         img = img.crop((self.vision_x, self.vision_y, self.vision_x+self.vision_width, self.vision_x+self.vision_height))
+        print(ChessVision.TEMPLATE_PATH)
         try:
-            ChessVision.make_chessboard_template(img, analyse=self.crop_for_analyse)
+            ChessVision.make_chessboard_template(img, self.crop_for_analyse)
         except:
             self.warning(False)
             return
@@ -1343,7 +1344,7 @@ class ChessGUIApp:
                 
         else:
             name = self.builder.tkvariables['template_name'].get()
-            
+
             if name == '':
                 name = 'Untitled'
             try:
@@ -1353,7 +1354,8 @@ class ChessGUIApp:
             
             ChessVision.TEMPLATE_PATH = ChessVision._update_template_path(name)
             
-            img = Image.open(ChessVision.TEMPLATE_PATH / 'Chessboard.png')
+            img.save(ChessVision.TEMPLATE_PATH / 'Chessboard.png')
+            
             try:
                 ChessVision.make_chesspiece_template(img)
             except:
