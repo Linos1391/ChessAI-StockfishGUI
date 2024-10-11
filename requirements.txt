@@ -1,3 +1,5 @@
 pygubu
-Pillow
 stockfish
+Pillow
+PyScreeze
+rembg
