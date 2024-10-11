@@ -11,7 +11,7 @@
 [![][conda-shield]][conda-url]
 [![][stockfish-shield]][stockfish-url]
 
-[chessai-shield]: https://img.shields.io/badge/ChessAI-0.1.3-red
+[chessai-shield]: https://img.shields.io/badge/ChessAI-2.0.0-red
 [chessai-url]: https://github.com/Linos1391/ChessAI
 [python-shield]: https://img.shields.io/badge/Python-3.12+-yellow
 [python-url]: https://www.python.org/downloads/
