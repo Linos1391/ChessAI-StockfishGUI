@@ -14,7 +14,6 @@ def main():
         # Normal development mode. Use os.getcwd() or __file__ as appropriate in your case...
         path = PROJECT_PATH / 'setting.json'
     
-    
     try:
         with open(path, mode="r", encoding="utf-8") as read_file:
             data = json.load(read_file)
@@ -27,7 +26,8 @@ def main():
                 "Engine": "",
                 "Analyse Every Move": False,
                 "Elo": 1350,
-            },             
+                "Current Template": "",
+            }, 
             "Stockfish": {
                 "Debug Log File": "",
                 "UCI_Chess960": False,
@@ -49,3 +49,4 @@ def main():
     
 if __name__ == '__main__':
     main()
+    
