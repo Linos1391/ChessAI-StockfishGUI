@@ -44,11 +44,21 @@
 
 ## Tính năng
 
-#### Tính năng mới (v0.1.3):
+#### Tính năng mới (v2.0.0):
 
-- Có thể 'đi lại' và 'đi lại quá trình đi lại' nước cờ.
+- Cuối cùng, chúng ta cũng có tab vision (vì đang trong dang dở nên sẽ có lỗi).
 
-![feature_7](assets/features_7.gif)
+![features_8](assets/features_8.png)
+
+- Chọn file hoặc chụp màn hình. Sau đó cắt theo ý muốn.
+
+**Lưu ý:** Nền nên có một màu (Không màu gradient) và bạn không nên cắt quá sát. 
+
+![features_9](assets/features_9.png)
+
+- Tạo template theo ý mình
+
+![features_10](assets/features_10.png)
 
 #### Để xem những tính năng cũ, vào [Change Log](CHANGELOG-vi.md).
 
