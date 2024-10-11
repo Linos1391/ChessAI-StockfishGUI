@@ -1,3 +1,19 @@
+#### v2.0.0
+
+- Cuối cùng, chúng ta cũng có tab vision (vì đang trong dang dở nên sẽ có lỗi).
+
+![features_8](assets/features_8.png)
+
+- Chọn file hoặc chụp màn hình. Sau đó cắt theo ý muốn.
+
+**Lưu ý:** Nền nên có một màu (Không màu gradient) và bạn không nên cắt quá sát. 
+
+![features_9](assets/features_9.png)
+
+- Tạo template theo ý mình
+
+![features_10](assets/features_10.png)
+
 #### v0.1.3
 
 - Có thể 'đi lại' và 'đi lại quá trình đi lại' nước cờ.
