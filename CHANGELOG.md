@@ -1,4 +1,4 @@
-#### v2.0.0
+#### v0.2.0
 
 - Finally, we has the vision tab (Still WIP so there will be some errors).
 
