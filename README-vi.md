@@ -44,7 +44,7 @@
 
 ## Tính năng
 
-#### Tính năng mới (v2.0.0):
+#### Tính năng mới (v0.2.0):
 
 - Cuối cùng, chúng ta cũng có tab vision (vì đang trong dang dở nên sẽ có lỗi).
 
