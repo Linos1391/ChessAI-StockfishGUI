@@ -44,7 +44,7 @@ This application will help you analyse chess position as a sub-window.
 
 ## Features
 
-#### New feature (v2.0.0):
+#### New feature (v0.2.0):
 
 - Finally, we has the vision tab (Still WIP so there will be some errors).
 
