@@ -89,7 +89,8 @@ pip install -r requirements.txt
     "ChessAI": {
         "Engine": "", <-- Put your Stockfish path here (.exe)
         "Analyse Every Move": false,
-        "Elo": 1350
+        "Elo": 1350,
+        "Current Template": "Chesscom"
     },
     "Stockfish": {
         "Debug Log File": "",
