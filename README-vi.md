@@ -66,9 +66,9 @@
 
 #### Lựa chọn 1: Tải [file .exe](https://github.com/Linos1391/ChessAI/releases/tag/exe-file).
 
-- Open .exe file once for 'setting.json' being made. Then modified it and enjoy.
+- Mở file .exe để 'setting.json' được tạo ra tự động. Điều chỉnh file đó và tận hưởng.
 
-**Notice:** Your browser may report this file as not usually downloaded. Report its safety will help me a lot!
+**Lưu ý:** Trình duyệt của bạn có thể thông báo rằng file này không thường được tải. Báo cáo sự an toàn của nó sẽ giúp tôi rất nhiều!
 
 #### Lựa chon 2: Tải thủ công thông qua Github:
 
