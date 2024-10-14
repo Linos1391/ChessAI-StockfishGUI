@@ -1,6 +1,6 @@
 #### v0.2.0
 
-- Finally, we has the vision tab (Still WIP so there will be some errors).
+- Finally, we have the vision tab (Still WIP so there will be some errors).
 
 ![features_8](assets/features_8.png)
 
