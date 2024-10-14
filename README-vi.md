@@ -60,7 +60,7 @@
 
 ![features_10](assets/features_10.png)
 
-#### Để xem những tính năng cũ, vào [Change Log](CHANGELOG-vi.md).
+### Để xem những tính năng cũ, vào [Change Log](CHANGELOG-vi.md).
 
 ## Tải xuống
 
