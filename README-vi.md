@@ -44,7 +44,7 @@
 
 ## Tính năng
 
-#### Tính năng mới (v0.2.0):
+### Tính năng mới (v0.2.0):
 
 - Cuối cùng, chúng ta cũng có tab vision (vì đang trong dang dở nên sẽ có lỗi).
 
@@ -64,9 +64,13 @@
 
 ## Tải xuống
 
-#### Lựa chọn 1: Tải [file .exe](https://github.com/Linos1391/ChessAI/releases/tag/exe-file).
+### Lựa chọn 1: Tải [file .exe](https://github.com/Linos1391/ChessAI/releases/tag/exe-file).
 
-#### Lựa chon 2: Tải thủ công thông qua Github:
+- Open .exe file once for 'setting.json' being made. Then modified it and enjoy.
+
+**Notice:** Your browser may report this file as not usually downloaded. Report its safety will help me a lot!
+
+### Lựa chon 2: Tải thủ công thông qua Github:
 
 1. Lưu thư mục về máy.
 
