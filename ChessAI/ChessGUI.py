@@ -143,14 +143,12 @@ class ChessGUIApp:
         self.engine.restart_engine()    
         self.engine.engine.set_fen_position(self.FEN)
         
-    def warning(self, first_warning: bool = True) -> None:
+    def warning(self, message: str) -> None:
         """
         Show warning
         """
-        if first_warning:
-            self.builder.get_object('warning_message').config(text='There must be 1 king each side.')
-        else:
-            self.builder.get_object('warning_message').config(text='Please crop better or choose\nanother file / screenshot again.')
+        
+        self.builder.get_object('warning_message').config(text=message)
         self.warning_dialog.show()
         
     # +------------------------------------------------+
@@ -794,7 +792,7 @@ class ChessGUIApp:
             return
         
         if self.white_king_exist != 1 or self.black_king_exist != 1:
-            self.warning()
+            self.warning('There must be 1 king each side.')
             return
         
         # playable chessboard
@@ -876,7 +874,7 @@ class ChessGUIApp:
         #TODO: It takes so much times within that the we must hold for it to be shown pressed.
         
         if self.white_king_exist != 1 or self.black_king_exist != 1:
-            self.warning()
+            self.warning('There must be 1 king each side.')
             return
         
         self.set_FEN()
@@ -1286,7 +1284,7 @@ class ChessGUIApp:
         try:
             ChessVision.make_chessboard_template(img, self.crop_for_analyse)
         except:
-            self.warning(False)
+            self.warning('Please crop better or choose\nanother file / screenshot again.')
             return
         
         if self.crop_for_analyse:   
@@ -1295,7 +1293,7 @@ class ChessGUIApp:
             try:
                 self.board = ChessVision.analyse_chess_pieces(img)
             except:
-                self.warning(False)
+                self.warning('Please crop better or choose\nanother file / screenshot again.')
                 return
 
             self.FEN = self.board_to_FEN(self.board)
@@ -1361,7 +1359,7 @@ class ChessGUIApp:
             try:
                 ChessVision.make_chesspiece_template(img)
             except:
-                self.warning(False)
+                self.warning('Please crop better or choose\nanother file / screenshot again.')
                 return
             
             self.vision_check_templates()
