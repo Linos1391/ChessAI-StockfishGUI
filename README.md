@@ -63,7 +63,7 @@ This application will help you analyse chess position as a sub-window.
 
 ## Installing
 
-#### Option 1: Install [.exe file](https://github.com/Linos1391/ChessAI/releases).
+#### Option 1: Install [.exe file](https://github.com/Linos1391/ChessAI/releases/tag/exe-file).
 
 #### Option 2: Manually install through Github:
 
