@@ -1,0 +1,15 @@
+{
+    "name": "Dark_Color.png",
+    "date": "15/10/2024",
+    "O.P": "-5",
+    "I.P": "+20",
+    "pattern": {
+        "White Rook": "White Knight",
+        "White King": "White Queen",
+        "Black Pawn": "White Queen",
+        "Black Bishop": "White Queen",
+        "Black Knight": "White Queen",
+        "Black Rook": "White Queen",
+        "Black Queen": "White Queen"
+    }
+}
