@@ -114,6 +114,7 @@ class ChessGUIApp:
         self.warning_dialog = self.builder.get_object('warning', self.mainwindow)
         self.delete_dialog = self.builder.get_object('delete', self.mainwindow)
         self.template_dialog = self.builder.get_object('template', self.mainwindow)
+        self.info_dialog = self.builder.get_object('info', self.mainwindow)
         builder.connect_callbacks(self)
 
         self.mainwindow.wm_attributes('-topmost', True)
@@ -121,6 +122,7 @@ class ChessGUIApp:
         self.cropping_dialog.toplevel.wm_attributes('-topmost', True)
         self.delete_dialog.toplevel.wm_attributes('-topmost', True)
         self.template_dialog.toplevel.wm_attributes('-topmost', True)
+        self.info_dialog.toplevel.wm_attributes('-topmost', True)
         self.builder.get_object('warning', self.mainwindow).toplevel.wm_attributes('-topmost', True)
         self.theme = ttk.Style()
         self.theme.theme_use('default')
@@ -871,8 +873,7 @@ class ChessGUIApp:
         self.set_FEN()
         
     def FEN_analyse(self, event: object) -> None:
-        #TODO: It takes so much times within that the we must hold for it to be shown pressed.
-        
+
         if self.white_king_exist != 1 or self.black_king_exist != 1:
             self.warning('There must be 1 king each side.')
             return
@@ -1118,6 +1119,40 @@ class ChessGUIApp:
         
         self.vision_check_templates()  
         
+    def vision_info(self, event: object):
+        name, date, OP, IP, pattern = ChessVision._get_info_value()
+        self.builder.tkvariables['vision_name'].set(name)
+        self.builder.tkvariables['vision_date'].set(date)
+        self.builder.tkvariables['vision_OP_var'].set(OP)
+        self.builder.tkvariables['vision_IP_var'].set(IP)
+        real_pattern: str = ''
+        for key, value in pattern.items():
+            real_pattern += f'{key} == {value}\n'
+        self.builder.tkvariables['vision_pattern_var'].set(real_pattern)
+        
+        self.info_dialog.show()
+    
+    def vision_info_update(self):
+        self.info_dialog.close()
+        
+        success, OP, IP, pattern = ChessVision.create_OP_and_IP()
+        if not success:
+            print('OP and IP are not valid, please edit the template. OP and IP will be set to -0.5 and +1, respectively')
+    
+        name, date, _, _, _ = ChessVision._get_info_value()
+        
+        info: dict = {
+            "name": name,
+            "date": date,
+            "O.P": f'-{OP}',
+            "I.P": f'+{IP}',
+            "pattern": pattern,
+        }
+
+        with open(ChessVision.TEMPLATE_PATH / 'Info.json', mode="w", encoding="utf-8") as write_file:
+            json.dump(info, write_file, indent=4)
+            write_file.close()
+        
     def vision_check_templates(self):
         # Only some are valid
         templates: tuple = ChessVision.count_templates()
@@ -1151,8 +1186,16 @@ class ChessGUIApp:
                 chessboard.place(x=2, y=2, width=72, height=72)
                 
                 # for template's name:
-                label = tk.Label(master=frame, text=template, width=14, background='#d9d9d9', wraplength=130)
+                label = tk.Label(master=frame, text=template, background='#d9d9d9', wraplength=107)
                 label.place(x=80, y=23)
+                
+                # for info button:
+                info = Image.open(os.path.join(PROJECT_PATH, 'GUI', 'vision_info.png'))
+                setattr(self, f'vision_item{index+1}_info', ImageTk.PhotoImage(info))
+                info = tk.Label(master=frame, name=f'info_{template}', image=getattr(self, f'vision_item{index+1}_info'), background='#d9d9d9')
+                info.bind('<ButtonPress-1>', self.vision_info)
+                Tooltip(info, 'Click to see template\'s info')
+                info.place(x=209, y=21, width=34, height=34)
                 
                 # for choose button:        
                 if template == chosen_template:
@@ -1164,7 +1207,7 @@ class ChessGUIApp:
                 choose_option = tk.Label(master=frame, name=f'choose_{template}', image=getattr(self, f'vision_item{index+1}_choose'), background='#d9d9d9')
                 choose_option.bind('<ButtonPress-1>', self.vision_choose)
                 Tooltip(choose_option, 'Click to select template')
-                choose_option.place(x=230, y=21, width=34, height=34)
+                choose_option.place(x=245, y=21, width=34, height=34)
                 
                 # for delete button
                 delete = Image.open(os.path.join(PROJECT_PATH, 'GUI', 'deselect.png'))
@@ -1172,7 +1215,7 @@ class ChessGUIApp:
                 delete = tk.Label(master=frame, name=f'delete_{template}', image=getattr(self, f'vision_item{index+1}_delete'), background='#d9d9d9')
                 delete.bind('<ButtonPress-1>', self.vision_delete_ask)
                 Tooltip(delete, 'Click to delete template')
-                delete.place(x=270, y=21, width=34, height=34)
+                delete.place(x=281, y=21, width=34, height=34)
                 
         add = Image.open(os.path.join(PROJECT_PATH, 'GUI', 'vision_add.png'))
         self.vision_add_image = ImageTk.PhotoImage(add)
@@ -1182,6 +1225,11 @@ class ChessGUIApp:
 
     def vision_tooltip(self):
         Tooltip(self.builder.get_object('Vision_side'), 'Change the side (User are black or white)')
+        Tooltip(self.builder.get_object('vision_change_points'), 'Automatically update O.P and I.P')
+        Tooltip(self.builder.get_object('vision_OP'), 'Outside points: If pieces\' template got extend outside, decrease the points (Not count the background)')
+        Tooltip(self.builder.get_object('vision_IP'), 'Inside points: If pieces\' template got exactly color, increase the point')
+        Tooltip(self.builder.get_object('vision_created'), 'The date template was created (dd/mm/yy)')
+        Tooltip(self.builder.get_object('vision_pattern'), 'The chess pieces that have same patterns (at least O.P and I.P cannot solve them)')
     
     def vision_side(self, event: object):
         if self.vision_black_side:
@@ -1282,13 +1330,13 @@ class ChessGUIApp:
         img = img.crop((self.vision_x, self.vision_y, self.vision_x+self.vision_width, self.vision_x+self.vision_height))
 
         try:
-            ChessVision.make_chessboard_template(img, self.crop_for_analyse)
+            img = ChessVision.make_chessboard_template(img)
         except:
             self.warning('Please crop better or choose\nanother file / screenshot again.')
             return
         
         if self.crop_for_analyse:   
-            img = Image.open(ChessVision.ANALYSE_PATH)
+            img.save(ChessVision.ANALYSE_PATH)
             
             try:
                 self.board = ChessVision.analyse_chess_pieces(img)
@@ -1357,8 +1405,10 @@ class ChessGUIApp:
             img.save(ChessVision.TEMPLATE_PATH / 'Chessboard.png')
             
             try:
-                ChessVision.make_chesspiece_template(img)
-            except:
+                ChessVision.make_chesspiece_template(img, name)
+            except Exception as e:
+                # FIXME - find the exception
+                print(e)
                 self.warning('Please crop better or choose\nanother file / screenshot again.')
                 return
             
@@ -1454,8 +1504,6 @@ class ChessGUIApp:
         check('Stockfish_Hash', self.engine.data['Stockfish']['Hash'])
         
         self.mainwindow.after(100, self.setting_warning)
-
-
 
 if __name__ == '__main__':
     print('Use "main.py" dude')
