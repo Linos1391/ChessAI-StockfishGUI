@@ -44,21 +44,12 @@ This application will help you analyse chess position as a sub-window.
 
 ## Features
 
-#### New feature (v0.2.0):
+#### New feature (v0.2.1):
 
-- Finally, we have the vision tab (Still WIP so there will be some errors).
+- Add template's info and O.P, I.P points.
 
-![features_8](assets/features_8.png)
+![features_11](assets/features_11.png)
 
-- Choose file or screenshot your chessboard. Then crop it.
-
-**Notice:** The background must one color only (No gradient) and you must not crop it too tight. 
-
-![features_9](assets/features_9.png)
-
-- Make your own custom templates.
-
-![features_10](assets/features_10.png)
 #### For old features, visit [Change Log](CHANGELOG.md).
 
 ## Installing
