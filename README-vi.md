@@ -11,7 +11,7 @@
 [![][conda-shield]][conda-url]
 [![][stockfish-shield]][stockfish-url]
 
-[chessai-shield]: https://img.shields.io/badge/ChessAI-0.2.0-red
+[chessai-shield]: https://img.shields.io/badge/ChessAI-0.2.1-red
 [chessai-url]: https://github.com/Linos1391/ChessAI
 [python-shield]: https://img.shields.io/badge/Python-3.12+-yellow
 [python-url]: https://www.python.org/downloads/
@@ -44,21 +44,11 @@
 
 ## Tính năng
 
-#### Tính năng mới (v0.2.0):
+#### Tính năng mới (v0.2.1):
 
-- Cuối cùng, chúng ta cũng có tab vision (vì đang trong dang dở nên sẽ có lỗi).
+- Thêm thông tin của mẫu và điểm O.P, I.P.
 
-![features_8](assets/features_8.png)
-
-- Chọn file hoặc chụp màn hình. Sau đó cắt theo ý muốn.
-
-**Lưu ý:** Nền nên có một màu (Không màu gradient) và bạn không nên cắt quá sát. 
-
-![features_9](assets/features_9.png)
-
-- Tạo template theo ý mình
-
-![features_10](assets/features_10.png)
+![features_11](assets/features_11.png)
 
 #### Để xem những tính năng cũ, vào [Change Log](CHANGELOG-vi.md).
 
