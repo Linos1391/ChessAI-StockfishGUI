@@ -1,3 +1,9 @@
+#### v0.2.1
+
+- Add template's info and O.P, I.P points.
+
+![features_11](assets/features_11.png)
+
 #### v0.2.0
 
 - Finally, we have the vision tab (Still WIP so there will be some errors).
