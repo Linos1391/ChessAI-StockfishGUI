@@ -60,10 +60,13 @@ class Engine:
         with open(PROJECT_PATH / 'history.json', mode="r", encoding="utf-8") as read_file:
             data: dict = json.load(read_file)
             read_file.close()
-            
-        self.engine.set_fen_position(data[str(len(data) - 1)]['fen'])
         
-        print('Complete restart Stockfish.')
+        if len(data) == 1:
+            self.engine.set_fen_position(data['0']['fen'])
+        else:
+            self.engine.set_fen_position(data[str(len(data) - 2)]['fen'])
+        
+        print('Complete restart Stockfish. Used the previous position.')
         
 
     def get_stats(self) -> dict:
