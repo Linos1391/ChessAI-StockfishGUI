@@ -1120,6 +1120,9 @@ class ChessGUIApp:
         self.vision_check_templates()  
         
     def vision_info(self, event: object):
+        template = event.widget._name[5:]
+        ChessVision.TEMPLATE_PATH = ChessVision._update_template_path(template)
+        
         name, date, OP, IP, pattern = ChessVision._get_info_value()
         self.builder.tkvariables['vision_name'].set(name)
         self.builder.tkvariables['vision_date'].set(date)
