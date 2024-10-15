@@ -1135,6 +1135,10 @@ class ChessGUIApp:
     def vision_info_update(self):
         self.info_dialog.close()
         
+        print('+-----------------------------------------------------------------------------------+')
+        print('| Create O.P and I.P, will take lots of time. Grab some coffee or do something else |')
+        print('+-----------------------------------------------------------------------------------+')
+        
         success, OP, IP, pattern = ChessVision.create_OP_and_IP()
         if not success:
             print('OP and IP are not valid, please edit the template. OP and IP will be set to -0.5 and +1, respectively')
