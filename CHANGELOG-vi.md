@@ -1,3 +1,9 @@
+#### v0.2.1
+
+- Thêm thông tin của mẫu và điểm O.P, I.P.
+
+![features_11](assets/features_11.png)
+
 #### v0.2.0
 
 - Cuối cùng, chúng ta cũng có tab vision (vì đang trong dang dở nên sẽ có lỗi).
