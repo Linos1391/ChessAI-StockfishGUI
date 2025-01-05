@@ -48,7 +48,7 @@ def main():
         }
 
     if data['ChessAI']['Engine'] == '':
-        stockfish_path = input('Please paste in path to stockfish:\n>>')
+        stockfish_path = input('Please paste in path to stockfish:\n>> ')
         if stockfish_path == '':
             raise StockfishException('You did not add the Stockfish path yet.')
 
