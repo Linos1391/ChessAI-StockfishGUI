@@ -31,4 +31,4 @@ Sau những bước kể trên, tính năng train model đã được mở khoá
 3. Hình nền của bàn cờ (tức là cái mày bên ngoài bàn cờ, không phải bên trong) KHÔNG nên là dạng gradient (kiểu màu sắc chuyển dần từ màu này sang màu kia).
 4. Trình làm template tự động vẫn còn khuyết điểm. Bạn có thể tự chỉnh template (dùng Photoshop hay sao đó) và train lại để có model tốt hơn (chỉ là đừng đổi tên file nhé).
 5. Nếu bạn có kinh nghiệm với PyTorch, và thấy dùng hai ảnh cho một nhãn tên là quá sơ sài. Cứ thoải mái thêm ảnh vào theo ý thích, nhớ chỉnh `Labels.csv`. Sau đó train lại đến khi nào vừa ý.
-6. Tôi không phải là coder đỉnh nóc kịch trần gì cả, nhưng tôi đã cố hết sức để code chỉnh chu nhất có thể. Mọi đóng góp đều được đón nhận, nhớ đừng quên unit test thôi! (Có thể tôi sẽ hỏi cái contribution đó làm gì nhé.)
+6. Tôi không phải là coder đỉnh nóc kịch trần gì cả, nhưng tôi đã cố hết sức để code chỉnh chu nhất có thể. Mọi đóng góp đều được đón nhận, có thể tôi sẽ hỏi cái contribution đó làm gì nhé.
