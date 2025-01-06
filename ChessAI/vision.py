@@ -189,17 +189,25 @@ class Vision:
 
         # those on board.
         for (loc_x, loc_y, name) in (
+                (0, 0, 'Black_Rook_1.png'),
                 (7, 0, 'Black_Rook_2.png'),
+                (6, 0, 'Black_Knight_1.png'),
                 (1, 0, 'Black_Knight_2.png'),
                 (2, 0, 'Black_Bishop_1.png'),
+                (5, 0, 'Black_Bishop_2.png'),
                 (3, 0, 'Black_Queen_2.png'),
                 (4, 0, 'Black_King_1.png'),
                 (1, 1, 'Black_Pawn_1.png'),
+                (0, 1, 'Black_Pawn_2.png'),
+                (7, 7, 'White_Rook_1.png'),
                 (0, 7, 'White_Rook_2.png'),
+                (1, 7, 'White_Knight_1.png'),
                 (6, 7, 'White_Knight_2.png'),
-                (2, 7, 'White_Bishop_2.png'),
+                (2, 7, 'White_Bishop_1.png'),
+                (5, 7, 'White_Bishop_2.png'),
                 (3, 7, 'White_Queen_1.png'),
                 (4, 7, 'White_King_2.png'),
+                (0, 6, 'White_Pawn_1.png'),
                 (1, 6, 'White_Pawn_2.png'),
                 (0, 2, 'Empty_1.png'),
                 (1, 2, 'Empty_2.png'),
@@ -214,19 +222,11 @@ class Vision:
         # those not
         empty_1 = Image.open(self.template_path / 'Empty_1.png').convert('RGB')
         empty_2 = Image.open(self.template_path / 'Empty_2.png').convert('RGB')
-        
-        for name in ('Black_Bishop_2.png',
-                     'Black_King_2.png',
-                     'Black_Knight_1.png',
-                     'Black_Pawn_2.png',
+
+        for name in ('Black_King_2.png',
                      'Black_Queen_1.png',
-                     'Black_Rook_1.png',
-                     'White_Bishop_1.png',
                      'White_King_1.png',
-                     'White_Knight_1.png',
-                     'White_Pawn_1.png',
-                     'White_Queen_2.png',
-                     'White_Rook_1.png',):
+                     'White_Queen_2.png',):
             mode: str = name[-5]
             if mode == '1':
                 opposite_name: str = name[:-5] + '2.png'

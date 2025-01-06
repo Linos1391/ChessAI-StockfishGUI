@@ -93,6 +93,7 @@ https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/TRAINING.md')
         self.vision_warn_no_torch()
 
         if PYTORCH_AVAILABLE:
+            self.builder.tkvariables['template_name'].get()
             self.template_dialog.show()
 
     def vision_add_screenshot(self):
@@ -283,6 +284,8 @@ https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/TRAINING.md')
         img = img.resize((width, 200))
         self.vision_crop_canva = ImageTk.PhotoImage(img)
 
+        self.builder.tkvariables['vision_var_x'].set(0)
+        self.builder.tkvariables['vision_var_y'].set(0)
         self.builder.tkvariables['vision_var_width'].set(self.vision_original_width)
         self.builder.tkvariables['vision_var_height'].set(self.vision_original_height)
         self.builder.get_object('vision_crop').config(width = width)
@@ -355,7 +358,7 @@ https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/TRAINING.md')
         self.cropping_dialog.close()
         img = Image.open(ANALYSE_PATH)
         img = img.crop((self.vision_x, self.vision_y, self.vision_x\
-            +self.vision_width, self.vision_x+self.vision_height))
+            +self.vision_width, self.vision_y+self.vision_height))
 
         try:
             img = vision_ext.make_chessboard_template(img=img)

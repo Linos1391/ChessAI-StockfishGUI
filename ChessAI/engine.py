@@ -2,6 +2,7 @@
 
 import json
 import pathlib
+import os
 
 from stockfish import Stockfish, StockfishException
 
@@ -32,7 +33,8 @@ class ModifiedStockfish(Stockfish):
         if self._stockfish.poll() is None and not self._has_quit_command_been_sent:
             # My code:
             if self.print_command:
-                print(f'Input: {command}')
+                print(f'\r{(os.get_terminal_size().columns) * ' '}', end='') # clear line
+                print(f'\rLast Input: {command}', end='')
             # so the credit is given
             self._stockfish.stdin.write(f"{command}\n")
             self._stockfish.stdin.flush()

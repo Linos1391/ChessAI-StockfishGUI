@@ -135,7 +135,9 @@ class TrainModel:
                 correct += (pred.argmax(1) == _label).type(torch.float).sum().item()
         test_loss /= num_batches
         correct /= size
-        print(f"\r Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f}", end='')
+
+        print(f'\r{(os.get_terminal_size().columns) * ' '}', end='') # clear line
+        print(f"\rTraining: Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f}", end='')
         return correct
 
     def hardcore_train(self, require_accuracy: float = 1) -> float:
@@ -150,7 +152,6 @@ class TrainModel:
         """
         current_accuracy: float = 0
 
-        print('Training:')
         while current_accuracy < require_accuracy:
             self.train()
             current_accuracy = self.test()
