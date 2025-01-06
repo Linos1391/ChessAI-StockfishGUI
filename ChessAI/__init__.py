@@ -1,7 +1,13 @@
+"""The __init__ of package."""
+
+from .gui import ChessAIApp
+from .engine import Engine
+from . import vision
+
 __all__ = [
-    "ChessGUI",
-    "ChessEngine",
-    "ChessVision",
+    "ChessAIApp",
+    "Engine",
+    "vision",
 ]
 
-__version__ = "0.2.1"
+__version__ = "1.0.0"
