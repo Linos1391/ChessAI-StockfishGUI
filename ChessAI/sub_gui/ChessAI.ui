@@ -1,0 +1,1389 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.4" author="PygubuDesigner 0.39.3">
+  <project>
+    <settings>
+      <setting id="name">ChessAI</setting>
+      <setting id="description">The AI that kills chess.</setting>
+      <setting id="module_name">ChessGUI</setting>
+      <setting id="template">application</setting>
+      <setting id="main_widget">title</setting>
+      <setting id="main_classname">ChessGUI</setting>
+      <setting id="main_menu" />
+      <setting id="output_dir" />
+      <setting id="output_dir2" />
+      <setting id="import_tkvariables">False</setting>
+      <setting id="use_ttk_styledefinition_file">False</setting>
+      <setting id="use_i18n">False</setting>
+      <setting id="all_ids_attributes">False</setting>
+      <setting id="generate_code_onsave">False</setting>
+      <setting id="use_window_centering_code">True</setting>
+      <setting id="ttk_style_definition_file" />
+    </settings>
+    <customwidgets />
+  </project>
+  <object class="tk.Toplevel" id="title" named="True">
+    <property name="height">320</property>
+    <property name="iconbitmap">Icon.ico</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">ChessAI</property>
+    <property name="width">320</property>
+    <child>
+      <object class="ttk.Notebook" id="root" named="True">
+        <property name="height">320</property>
+        <property name="width">320</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Notebook.Tab" id="home" named="True">
+            <property name="text" translatable="yes">Home</property>
+            <child>
+              <object class="ttk.Frame" id="frame8">
+                <property name="height">300</property>
+                <property name="width">300</property>
+                <layout manager="pack">
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="pygubu.builder.widgets.scrolledframe" id="scrolledframe1">
+                    <property name="borderwidth">2</property>
+                    <property name="height">300</property>
+                    <property name="relief">groove</property>
+                    <property name="scrolltype">vertical</property>
+                    <property name="usemousewheel">true</property>
+                    <property name="width">100</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">227</property>
+                      <property name="width">54</property>
+                      <property name="x">1</property>
+                      <property name="y">10</property>
+                    </layout>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="deselect" named="True">
+                        <property name="image">deselect.png</property>
+                        <property name="text" translatable="yes">label4</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack">
+                          <property name="side">top</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="white_pawn" named="True">
+                        <property name="font">TkDefaultFont</property>
+                        <property name="image">white_pawn.png</property>
+                        <property name="justify">left</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="white_bishop" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkTextFont</property>
+                        <property name="image">white_bishop.png</property>
+                        <property name="justify">center</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="white_knight" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkDefaultFont</property>
+                        <property name="image">white_knight.png</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="white_rook" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkFixedFont</property>
+                        <property name="image">white_rook.png</property>
+                        <property name="justify">left</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="white_queen" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkFixedFont</property>
+                        <property name="image">white_queen.png</property>
+                        <property name="justify">left</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="white_king" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkFixedFont</property>
+                        <property name="image">white_king.png</property>
+                        <property name="justify">left</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="black_pawn" named="True">
+                        <property name="font">TkDefaultFont</property>
+                        <property name="image">black_pawn.png</property>
+                        <property name="justify">center</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="black_bishop" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkTextFont</property>
+                        <property name="image">black_bishop.png</property>
+                        <property name="justify">center</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="black_knight" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkDefaultFont</property>
+                        <property name="image">black_knight.png</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="black_rook" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkFixedFont</property>
+                        <property name="image">black_rook.png</property>
+                        <property name="justify">left</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="black_queen" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkFixedFont</property>
+                        <property name="image">black_queen.png</property>
+                        <property name="justify">left</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.forms.ttkwidget.Label" id="black_king" named="True">
+                        <property name="cursor">arrow</property>
+                        <property name="font">TkDefaultFont</property>
+                        <property name="image">black_king.png</property>
+                        <property name="justify">left</property>
+                        <property name="relief">flat</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="select_pieces" add="True" />
+                        <layout manager="pack" />
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Canvas" id="chessboard" named="True">
+                    <property name="highlightthickness">0</property>
+                    <bind sequence="&lt;Button-1&gt;" handler="chessboard_press" add="True" />
+                    <bind sequence="&lt;Leave&gt;" handler="chessboard_unhover" add="True" />
+                    <bind sequence="&lt;Motion&gt;" handler="chessboard_hover" add="True" />
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">256</property>
+                      <property name="width">256</property>
+                      <property name="x">60</property>
+                      <property name="y">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame1">
+                    <property name="height">200</property>
+                    <property name="relief">sunken</property>
+                    <property name="width">200</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">50</property>
+                      <property name="width">316</property>
+                      <property name="x">1</property>
+                      <property name="y">269</property>
+                    </layout>
+                    <child>
+                      <object class="tk.Checkbutton" id="castle_white_king" named="True">
+                        <property name="background">#d9d9d9</property>
+                        <property name="borderwidth">2</property>
+                        <property name="offvalue">False</property>
+                        <property name="onvalue">True</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">K</property>
+                        <property name="variable">boolean:castle_K</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_castle" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">28</property>
+                          <property name="width">37</property>
+                          <property name="x">1</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="tk.Checkbutton" id="castle_white_queen" named="True">
+                        <property name="background">#d9d9d9</property>
+                        <property name="borderwidth">2</property>
+                        <property name="offvalue">False</property>
+                        <property name="onvalue">True</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">Q</property>
+                        <property name="variable">boolean:castle_Q</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_castle" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">28</property>
+                          <property name="width">37</property>
+                          <property name="x">38</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="tk.Checkbutton" id="castle_black_king" named="True">
+                        <property name="background">#d9d9d9</property>
+                        <property name="borderwidth">2</property>
+                        <property name="offvalue">False</property>
+                        <property name="onvalue">True</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">k</property>
+                        <property name="variable">boolean:castle_k</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_castle" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">28</property>
+                          <property name="width">37</property>
+                          <property name="x">75</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="tk.Checkbutton" id="castle_black_queen" named="True">
+                        <property name="background">#d9d9d9</property>
+                        <property name="borderwidth">2</property>
+                        <property name="offvalue">False</property>
+                        <property name="onvalue">True</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">q</property>
+                        <property name="variable">boolean:castle_q</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_castle" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">28</property>
+                          <property name="width">37</property>
+                          <property name="x">112</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="flip" named="True">
+                        <property name="borderwidth">2</property>
+                        <property name="image">flip.png</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">label1</property>
+                        <bind sequence="&lt;Button-1&gt;" handler="object_click" add="True" />
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_flip" add="True" />
+                        <bind sequence="&lt;ButtonRelease-1&gt;" handler="object_unclick" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">28</property>
+                          <property name="width">28</property>
+                          <property name="x">149</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="white_side" named="True">
+                        <property name="background">#888888</property>
+                        <property name="borderwidth">2</property>
+                        <property name="image">white_side.png</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">label5</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_white_side" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">28</property>
+                          <property name="width">28</property>
+                          <property name="x">178</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="black_side" named="True">
+                        <property name="borderwidth">2</property>
+                        <property name="image">black_side.png</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">label5</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_black_side" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">28</property>
+                          <property name="width">28</property>
+                          <property name="x">207</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="tk.Button" id="analyse" named="True">
+                        <property name="background">#d9d9d9</property>
+                        <property name="borderwidth">2</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">Analyse</property>
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_analyse" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">28</property>
+                          <property name="relx">0.0</property>
+                          <property name="width">81</property>
+                          <property name="x">235</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Frame" id="frame4">
+                        <property name="borderwidth">1</property>
+                        <property name="height">200</property>
+                        <property name="relief">raised</property>
+                        <property name="width">200</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">19</property>
+                          <property name="width">74</property>
+                          <property name="x">75</property>
+                          <property name="y">30</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="stat_type" named="True">
+                            <property name="font">{.VnArial} 7 {}</property>
+                            <property name="relief">flat</property>
+                            <property name="text" translatable="yes">cp</property>
+                            <layout manager="place">
+                              <property name="anchor">nw</property>
+                              <property name="x">1</property>
+                              <property name="y">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="stat_value" named="True">
+                            <property name="font">{.VnArial} 7 {}</property>
+                            <property name="text" translatable="yes">+0.21</property>
+                            <layout manager="place">
+                              <property name="anchor">nw</property>
+                              <property name="x">32</property>
+                              <property name="y">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Frame" id="frame5">
+                        <property name="height">200</property>
+                        <property name="relief">raised</property>
+                        <property name="width">200</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">19</property>
+                          <property name="width">167</property>
+                          <property name="x">149</property>
+                          <property name="y">30</property>
+                        </layout>
+                        <child>
+                          <object class="pygubu.forms.ttkwidget.Entry" id="elo" named="True">
+                            <property name="font">{.VnArial} 9 {}</property>
+                            <property name="justify">center</property>
+                            <property name="text" translatable="yes">1350</property>
+                            <property name="textvariable">string:engine_elo</property>
+                            <layout manager="place">
+                              <property name="anchor">nw</property>
+                              <property name="height">16</property>
+                              <property name="width">84</property>
+                              <property name="x">1</property>
+                              <property name="y">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="pygubu.forms.ttkwidget.Entry" id="halfmove" named="True">
+                            <property name="font">{.VnArial} 9 {}</property>
+                            <property name="justify">center</property>
+                            <property name="text" translatable="yes">0</property>
+                            <property name="textvariable">string:engine_halfmove</property>
+                            <layout manager="place">
+                              <property name="anchor">nw</property>
+                              <property name="height">16</property>
+                              <property name="width">40</property>
+                              <property name="x">86</property>
+                              <property name="y">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="pygubu.forms.ttkwidget.Entry" id="fullmove" named="True">
+                            <property name="font">{.VnArial} 9 {}</property>
+                            <property name="justify">center</property>
+                            <property name="text" translatable="yes">1</property>
+                            <property name="textvariable">string:engine_fullmove</property>
+                            <layout manager="place">
+                              <property name="anchor">nw</property>
+                              <property name="height">16</property>
+                              <property name="width">40</property>
+                              <property name="x">126</property>
+                              <property name="y">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Frame" id="frame7">
+                        <property name="height">200</property>
+                        <property name="relief">raised</property>
+                        <property name="width">200</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">19</property>
+                          <property name="width">74</property>
+                          <property name="x">1</property>
+                          <property name="y">30</property>
+                        </layout>
+                        <child>
+                          <object class="ttk.Label" id="top1" named="True">
+                            <property name="font">{.VnArial} 7 {}</property>
+                            <property name="textvariable">string:var_top1</property>
+                            <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_top1" add="True" />
+                            <layout manager="place">
+                              <property name="anchor">nw</property>
+                              <property name="height">17</property>
+                              <property name="width">36</property>
+                              <property name="x">1</property>
+                              <property name="y">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="ttk.Label" id="top2" named="True">
+                            <property name="font">{.VnArial} 7 {}</property>
+                            <property name="textvariable">string:var_top2</property>
+                            <bind sequence="&lt;ButtonPress-1&gt;" handler="fen_top2" add="True" />
+                            <layout manager="place">
+                              <property name="anchor">nw</property>
+                              <property name="height">17</property>
+                              <property name="width">36</property>
+                              <property name="x">37</property>
+                              <property name="y">1</property>
+                            </layout>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame10">
+                    <property name="height">200</property>
+                    <property name="relief">sunken</property>
+                    <property name="width">200</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">28</property>
+                      <property name="width">54</property>
+                      <property name="x">1</property>
+                      <property name="y">240</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Label" id="undo" named="True">
+                        <property name="image">undo.png</property>
+                        <property name="text" translatable="yes">label1</property>
+                        <bind sequence="&lt;Button-1&gt;" handler="board_undo" add="True" />
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="object_click" add="True" />
+                        <bind sequence="&lt;ButtonRelease-1&gt;" handler="object_unclick" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">26</property>
+                          <property name="width">26</property>
+                          <property name="x">1</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="redo" named="True">
+                        <property name="image">redo.png</property>
+                        <property name="text" translatable="yes">label3</property>
+                        <bind sequence="&lt;Button-1&gt;" handler="board_redo" add="True" />
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="object_click" add="True" />
+                        <bind sequence="&lt;ButtonRelease-1&gt;" handler="object_unclick" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">26</property>
+                          <property name="width">26</property>
+                          <property name="x">26</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Notebook.Tab" id="vision" named="True">
+            <property name="text" translatable="yes">Vision</property>
+            <child>
+              <object class="ttk.Frame" id="frame14">
+                <property name="height">200</property>
+                <property name="width">200</property>
+                <layout manager="pack">
+                  <property name="side">top</property>
+                </layout>
+                <child>
+                  <object class="pygubu.builder.widgets.scrolledframe" id="vision_templates" named="True">
+                    <property name="height">350</property>
+                    <property name="relief">sunken</property>
+                    <property name="scrolltype">horizontal</property>
+                    <property name="usemousewheel">true</property>
+                    <property name="width">318</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">270</property>
+                      <property name="width">318</property>
+                      <property name="x">1</property>
+                      <property name="y">1</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame11">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">47</property>
+                      <property name="width">318</property>
+                      <property name="x">1</property>
+                      <property name="y">272</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Button" id="button2">
+                        <property name="command" type="command" cbtype="simple">vision_screenshot</property>
+                        <property name="text" translatable="yes">Screenshot</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">44</property>
+                          <property name="width">134</property>
+                          <property name="x">1</property>
+                          <property name="y">2</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.widgets.PathChooserButton" id="pathchooserbutton2">
+                        <property name="text" translatable="yes">Choose file</property>
+                        <bind sequence="&lt;&lt;PathChooserPathChanged&gt;&gt;" handler="vision_choose_file" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">44</property>
+                          <property name="width">134</property>
+                          <property name="x">137</property>
+                          <property name="y">2</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Vision_side" named="True">
+                        <property name="image">vision_white.png</property>
+                        <property name="relief">raised</property>
+                        <property name="text" translatable="yes">label1</property>
+                        <bind sequence="&lt;Button-1&gt;" handler="object_click" add="True" />
+                        <bind sequence="&lt;ButtonPress-1&gt;" handler="vision_side" add="True" />
+                        <bind sequence="&lt;ButtonRelease-1&gt;" handler="object_unclick" add="True" />
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">44</property>
+                          <property name="width">44</property>
+                          <property name="x">273</property>
+                          <property name="y">2</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Notebook.Tab" id="settings" named="True">
+            <property name="text" translatable="yes">Settings</property>
+            <child>
+              <object class="ttk.Frame" id="frame3">
+                <property name="height">200</property>
+                <property name="width">200</property>
+                <layout manager="place">
+                  <property name="anchor">nw</property>
+                  <property name="x">0</property>
+                  <property name="y">0</property>
+                </layout>
+                <child>
+                  <object class="ttk.Button" id="setting_update" named="True">
+                    <property name="command" type="command" cbtype="simple">setting_update_data</property>
+                    <property name="text" translatable="yes">Update</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">33</property>
+                      <property name="width">113</property>
+                      <property name="x">100</property>
+                      <property name="y">284</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Frame" id="frame6">
+                    <property name="height">200</property>
+                    <property name="relief">sunken</property>
+                    <property name="width">200</property>
+                    <layout manager="place">
+                      <property name="anchor">nw</property>
+                      <property name="height">280</property>
+                      <property name="width">318</property>
+                      <property name="x">1</property>
+                      <property name="y">1</property>
+                    </layout>
+                    <child>
+                      <object class="ttk.Label" id="setting_ChessAI" named="True">
+                        <property name="font">{Lucida Sans Typewriter} 16 {bold}</property>
+                        <property name="text" translatable="yes">ChessAI</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="x">5</property>
+                          <property name="y">1</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Label_ChessAI_Analyse_Every_Move" named="True">
+                        <property name="font">{Lucida Sans Typewriter} 9 {}</property>
+                        <property name="text" translatable="yes">Analyse Every Move</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="x">25</property>
+                          <property name="y">41</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Button" id="ChessAI_Analyse_Every_Move" named="True">
+                        <property name="command" type="command" cbtype="with_wid">setting_data</property>
+                        <property name="text" translatable="yes">False</property>
+                        <property name="textvariable">string:Entry_ChessAI_Analyse_Every_Move</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">30</property>
+                          <property name="width">50</property>
+                          <property name="x">250</property>
+                          <property name="y">35</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="setting_stockfish" named="True">
+                        <property name="font">{Lucida Sans Typewriter} 16 {bold}</property>
+                        <property name="text" translatable="yes">Stockfish</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="x">5</property>
+                          <property name="y">70</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Label_Stockfish_Debug_Log_File" named="True">
+                        <property name="font">{Lucida Sans Typewriter} 9 {}</property>
+                        <property name="text" translatable="yes">Debug Log File</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="x">25</property>
+                          <property name="y">110</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="pygubu.widgets.PathChooserInput" id="Stockfish_Debug_Log_File" named="True">
+                        <property name="defaultextension">.txt</property>
+                        <property name="mustexist">false</property>
+                        <property name="textvariable">string:Entry_Stockfish_Debug_Log_File</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">31</property>
+                          <property name="width">125</property>
+                          <property name="x">175</property>
+                          <property name="y">102</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Label_Stockfish_UCI_Chess960" named="True">
+                        <property name="font">{Lucida Sans Typewriter} 9 {}</property>
+                        <property name="text" translatable="yes">UCI_Chess960</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="x">25</property>
+                          <property name="y">145</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Button" id="Stockfish_UCI_Chess960" named="True">
+                        <property name="command" type="command" cbtype="with_wid">setting_data</property>
+                        <property name="text" translatable="yes">False</property>
+                        <property name="textvariable">string:Entry_Stockfish_UCI_Chess960</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">30</property>
+                          <property name="width">50</property>
+                          <property name="x">250</property>
+                          <property name="y">139</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Label_Stockfish_Min_Split_Depth" named="True">
+                        <property name="font">{Lucida Sans Typewriter} 9 {}</property>
+                        <property name="text" translatable="yes">Min Split Depth</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="x">25</property>
+                          <property name="y">180</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Entry" id="Stockfish_Min_Split_Depth" named="True">
+                        <property name="justify">center</property>
+                        <property name="text" translatable="yes">0</property>
+                        <property name="textvariable">int:Entry_Stockfish_Min_Split_Depth</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">27</property>
+                          <property name="width">50</property>
+                          <property name="x">250</property>
+                          <property name="y">174</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Label_Stockfish_Threads" named="True">
+                        <property name="font">{Lucida Sans Typewriter} 9 {}</property>
+                        <property name="text" translatable="yes">Threads</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="x">25</property>
+                          <property name="y">215</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Entry" id="Stockfish_Threads" named="True">
+                        <property name="justify">center</property>
+                        <property name="text" translatable="yes">1</property>
+                        <property name="textvariable">int:Entry_Stockfish_Threads</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">27</property>
+                          <property name="width">50</property>
+                          <property name="x">250</property>
+                          <property name="y">209</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Label_Stockfish_Hash" named="True">
+                        <property name="font">{Lucida Sans Typewriter} 9 {}</property>
+                        <property name="text" translatable="yes">Hash</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="x">25</property>
+                          <property name="y">250</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Entry" id="Stockfish_Hash" named="True">
+                        <property name="justify">center</property>
+                        <property name="text" translatable="yes">16</property>
+                        <property name="textvariable">int:Entry_Stockfish_Hash</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">27</property>
+                          <property name="width">50</property>
+                          <property name="x">250</property>
+                          <property name="y">244</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_ChessAI_Analyse_Every_Move" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">40</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_Debug_Log_File" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">109</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_UCI_Chess960" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">144</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_Min_Split_Depth" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">179</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_Threads" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">214</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="ttk.Label" id="Warning_Stockfish_Hash" named="True">
+                        <property name="compound">top</property>
+                        <property name="image">empty.png</property>
+                        <layout manager="place">
+                          <property name="anchor">nw</property>
+                          <property name="height">18</property>
+                          <property name="width">18</property>
+                          <property name="x">5</property>
+                          <property name="y">249</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="advance" named="True">
+    <property name="height">80</property>
+    <property name="iconbitmap">Icon.ico</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">ChessAI</property>
+    <property name="width">190</property>
+    <containerlayout manager="pack">
+      <property name="propagate">false</property>
+    </containerlayout>
+    <child>
+      <object class="ttk.Labelframe" id="labelframe1">
+        <property name="height">75</property>
+        <property name="text" translatable="yes">The pawn will become...</property>
+        <property name="width">250</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="pygubu.builder.widgets.combobox" id="combobox1">
+            <property name="keyvariable">string:advance_key</property>
+            <property name="values">["queen", "rook", "bishop", "knight"]</property>
+            <property name="width">250</property>
+            <layout manager="pack">
+              <property name="padx">5</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="button1">
+            <property name="command" type="command" cbtype="simple">advance_submit</property>
+            <property name="text" translatable="yes">Submit</property>
+            <layout manager="pack">
+              <property name="pady">5 0</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="warning" named="True">
+    <property name="height">50</property>
+    <property name="iconbitmap">Icon.ico</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">ChessAI</property>
+    <property name="width">250</property>
+    <child>
+      <object class="tk.Message" id="warning_message" named="True">
+        <property name="justify">center</property>
+        <property name="text" translatable="yes">There must be 1 king each side.</property>
+        <property name="width">250</property>
+        <layout manager="pack">
+          <property name="expand">true</property>
+          <property name="fill">both</property>
+          <property name="side">top</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="cropping" named="True">
+    <property name="iconbitmap">Icon.ico</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">ChessAI</property>
+    <child>
+      <object class="ttk.Labelframe" id="labelframe2">
+        <property name="height">200</property>
+        <property name="text" translatable="yes">Cropping the image</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="label9">
+            <property name="text" translatable="yes">x</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5 0</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="vision_x" named="True">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">int:vision_var_x</property>
+            <property name="width">10</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">10</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label6">
+            <property name="text" translatable="yes">y</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5 0</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="vision_y" named="True">
+            <property name="text" translatable="yes">0</property>
+            <property name="textvariable">int:vision_var_y</property>
+            <property name="width">10</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">10</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label7">
+            <property name="text" translatable="yes">width</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5 0</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="vision_width" named="True">
+            <property name="text" translatable="yes">200</property>
+            <property name="textvariable">int:vision_var_width</property>
+            <property name="width">10</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">10</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label8">
+            <property name="text" translatable="yes">height</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5 0</property>
+              <property name="row">3</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="vision_height" named="True">
+            <property name="text" translatable="yes">200</property>
+            <property name="textvariable">int:vision_var_height</property>
+            <property name="width">10</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">10</property>
+              <property name="row">3</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Canvas" id="vision_crop" named="True">
+            <property name="height">200</property>
+            <property name="highlightthickness">0</property>
+            <property name="width">200</property>
+            <bind sequence="&lt;Motion&gt;" handler="vision_crop_hovering" add="True" />
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="padx">0 5</property>
+              <property name="row">0</property>
+              <property name="rowspan">5</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="button3">
+            <property name="command" type="command" cbtype="simple">vision_crop_image</property>
+            <property name="text" translatable="yes">Crop</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5 0</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label10">
+            <property name="foreground">#e1031e</property>
+            <property name="text" translatable="yes">!Background must one color only (Yes, don't crop too tight)!</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="columnspan">3</property>
+              <property name="row">6</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="button4">
+            <property name="command" type="command" cbtype="simple">vision_crop_submit</property>
+            <property name="text" translatable="yes">Submit</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="row">4</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Label" id="label2">
+            <property name="text" translatable="yes">x = 0, y = 0</property>
+            <property name="textvariable">string:vision_crop_hovering_var</property>
+            <layout manager="grid">
+              <property name="column">2</property>
+              <property name="pady">3 0</property>
+              <property name="row">5</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="delete" named="True">
+    <property name="iconbitmap">Icon.ico</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">ChessAI</property>
+    <child>
+      <object class="ttk.Frame" id="frame2">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="label1">
+            <property name="font">TkTextFont</property>
+            <property name="text" translatable="yes">         Are you sure?</property>
+            <property name="width">20</property>
+            <layout manager="pack">
+              <property name="pady">1</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="button5">
+            <property name="command" type="command" cbtype="simple">vision_delete</property>
+            <property name="text" translatable="yes">Delete it</property>
+            <layout manager="pack">
+              <property name="pady">5</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="template" named="True">
+    <property name="iconbitmap">Icon.ico</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">ChessAI</property>
+    <child>
+      <object class="ttk.Labelframe" id="labelframe3">
+        <property name="height">200</property>
+        <property name="text" translatable="yes">Making template</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Label" id="label3">
+            <property name="text" translatable="yes">Name</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">10</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Entry" id="entry1">
+            <property name="textvariable">string:template_name</property>
+            <property name="width">10</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">5</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="button6">
+            <property name="command" type="command" cbtype="simple">vision_add_screenshot</property>
+            <property name="text" translatable="yes">Screenshot</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5</property>
+              <property name="pady">5 2</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="pygubu.widgets.PathChooserButton" id="pathchooserbutton1">
+            <property name="text" translatable="yes">Choose file</property>
+            <bind sequence="&lt;&lt;PathChooserPathChanged&gt;&gt;" handler="vision_add_choose_file" add="True" />
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">5</property>
+              <property name="pady">5 2</property>
+              <property name="row">1</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="info" named="True">
+    <property name="iconbitmap">Icon.ico</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">ChessAI</property>
+    <child>
+      <object class="ttk.Labelframe" id="labelframe4">
+        <property name="height">250</property>
+        <property name="text" translatable="yes">Template's information</property>
+        <property name="width">250</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Frame" id="frame15">
+            <property name="relief">sunken</property>
+            <layout manager="pack">
+              <property name="fill">x</property>
+              <property name="ipady">2</property>
+              <property name="padx">1</property>
+              <property name="side">top</property>
+            </layout>
+            <child>
+              <object class="ttk.Frame" id="frame9">
+                <property name="height">250</property>
+                <property name="width">100</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">1</property>
+                  <property name="pady">1</property>
+                  <property name="row">0</property>
+                  <property name="sticky">w</property>
+                </layout>
+                <child>
+                  <object class="ttk.Label" id="label5">
+                    <property name="text" translatable="yes">Name</property>
+                    <layout manager="pack">
+                      <property name="anchor">w</property>
+                      <property name="padx">2</property>
+                      <property name="pady">2</property>
+                      <property name="side">top</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Label" id="vision_created" named="True">
+                    <property name="text" translatable="yes">Created</property>
+                    <layout manager="pack">
+                      <property name="anchor">w</property>
+                      <property name="padx">2</property>
+                      <property name="side">top</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Label" id="vision_accuracy" named="True">
+                    <property name="text" translatable="yes">Accuracy</property>
+                    <layout manager="pack">
+                      <property name="anchor">w</property>
+                      <property name="padx">2</property>
+                      <property name="side">top</property>
+                    </layout>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Frame" id="frame13">
+                <property name="height">250</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">15</property>
+                  <property name="padx">1</property>
+                  <property name="pady">1</property>
+                  <property name="row">0</property>
+                  <property name="sticky">e</property>
+                </layout>
+                <child>
+                  <object class="ttk.Label" id="label13">
+                    <property name="text" translatable="yes">Chesscom</property>
+                    <property name="textvariable">string:vision_name</property>
+                    <layout manager="pack">
+                      <property name="anchor">e</property>
+                      <property name="padx">2</property>
+                      <property name="pady">2</property>
+                      <property name="side">top</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Label" id="label14">
+                    <property name="text" translatable="yes">25/12/0000</property>
+                    <property name="textvariable">string:vision_date</property>
+                    <layout manager="pack">
+                      <property name="anchor">e</property>
+                      <property name="padx">2</property>
+                      <property name="side">top</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Label" id="label18">
+                    <property name="text" translatable="yes">-0.25</property>
+                    <property name="textvariable">string:vision_accuracy_var</property>
+                    <layout manager="pack">
+                      <property name="anchor">e</property>
+                      <property name="padx">2</property>
+                      <property name="side">top</property>
+                    </layout>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="vision_change_points" named="True">
+            <property name="command" type="command" cbtype="simple">vision_info_update</property>
+            <property name="default">normal</property>
+            <property name="state">normal</property>
+            <property name="text" translatable="yes">Re-train</property>
+            <layout manager="pack">
+              <property name="pady">10 5</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
