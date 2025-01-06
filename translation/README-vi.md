@@ -28,7 +28,7 @@
 
 </div>
 
-## Tính năng
+# Tính năng
 
 #### Tính năng mới (v1.0.0):
 
@@ -42,7 +42,9 @@
 
 #### Để xem những tính năng cũ, vào [Change Log](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/translation/CHANGELOG-vi.md).
 
-## Tải xuống
+<br>
+
+# Tải xuống
 
 Sau khi tu luyện 7749 ngày, ChessAI đã có mặt trên PyPI!
 ```
@@ -52,7 +54,9 @@ pip3 install chessai-stockfish
 
 Nhưng bên trên là bản mặc định, nghĩa là các tính năng train model chưa được cài sẵn. Nếu muốn có bản hoàn chỉnh, hẫy vào [TRAINING.md](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/translation/TRAINING-vi.md).
 
-## Cài đặt Stockfish
+<br>
+
+# Cài đặt Stockfish
 
 Đến [trang tải xuống](https://stockfishchess.org/download/) và cài bản Stockfish hỗ trợ máy của bạn.
 <br>
@@ -70,17 +74,46 @@ Please paste in path to stockfish:
 >> (đường dẫn dán vô đây)
 ```
 
-## Sử dụng
+<br>
+
+# Bạn dùng Venv/Conda/Docker/...?
+
+Vào đường dẫn của folder ChessAI (nơi `chessai.cmd` đang nằm).
+```
+cd ...
+```
+Sau đó tìm OS của bạn.
+
+#### Cho Unix
+```
+chmod a+x locas.cmd
+echo 'export chessai_path=$PWD
+export PATH=$chessai_path:$PATH' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+#### Cho Window
+```
+powershell $old_path = [Environment]::GetEnvironmentVariable('path', 'user'); $new_path = $old_path + ';' + $PWD; [Environment]::SetEnvironmentVariable('path', $new_path,'User');
+```
+
+<br>
+
+# Sử dụng
 
 Dùng `chessai`.
 ```
 chessai
 ```
 
-## Giấy phép
+<br>
+
+# Giấy phép
 
 [GNU GPLv3](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/LICENSE)
 
-## Miễn trừ trách nhiệm
+<br>
+
+# Miễn trừ trách nhiệm
 
 Ứng dụng này ban đầu được thiết kế để phân tích những kênh livestream của Chess World Cup và lý do học tập. Làm ơn đừng dùng nó cho bất kỳ mục đích xấu nào. Những thiệt hại trong việc lạm dụng ứng dụng này sẽ không là trách nhiệm của chủ sở hữu.

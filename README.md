@@ -28,7 +28,7 @@ This application will help you analyse chess position as a sub-window.
 
 </div>
 
-## Features
+# Features
 
 #### New feature (v1.0.0):
 
@@ -42,7 +42,9 @@ This application will help you analyse chess position as a sub-window.
 
 #### For old features, visit [Change Log](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/CHANGELOG.md).
 
-## Installing
+<br>
+
+# Installing
 
 I've grown up and made a PyPI for you guys!
 ```
@@ -52,7 +54,9 @@ pip3 install chessai-stockfish
 
 But above is default edition, which mean training features are not allowed yet. If you want the full edition, visit [TRAINING.md](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/TRAINING.md).
 
-## Set up Stockfish
+<br>
+
+# Set up Stockfish
 
 Go to [download page](https://stockfishchess.org/download/) and install Stockfish that support your device.
 <br>
@@ -70,17 +74,46 @@ Please paste in path to stockfish:
 >> (your path goes here)
 ```
 
-## Running
+<br>
+
+# I use Venv/Conda/Docker/...
+
+Go to your ChessAI directory (where `chessai.cmd` is stored).
+```
+cd ...
+```
+Then find your OS below.
+
+#### For Unix
+```
+chmod a+x locas.cmd
+echo 'export chessai_path=$PWD
+export PATH=$chessai_path:$PATH' >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+#### For Window
+```
+powershell $old_path = [Environment]::GetEnvironmentVariable('path', 'user'); $new_path = $old_path + ';' + $PWD; [Environment]::SetEnvironmentVariable('path', $new_path,'User');
+```
+
+<br>
+
+# Running
 
 Use `chessai`.
 ```
 chessai
 ```
 
-## License
+<br>
+
+# License
 
 [GNU GPLv3](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/LICENSE)
 
-## Disclaimer
+<br>
+
+# Disclaimer
 
 This application was initially designed for analysing Chess World Cup livestreams and educational purposes. Please don't use this for any unethical reasons. Any damages from abusing this application will not be the responsibility of the author.
