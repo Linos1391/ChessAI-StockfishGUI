@@ -31,4 +31,4 @@ After these steps, the training features has been unlocked. But don't go yet, le
 3. It is recommended that the chessboard's background (meaning the color outside of the chessboard) should NOT be gradient.
 4. The automatic template maker still has its weakness. You can fix the template yourself (by Photoshop or image editor) and re-train for better result (just don't rename files though).
 5. If you have experience with PyTorch, and finding using only two images for one label is too poorly trained. Feel free to add images, just remember to edit `Labels.csv`. Then re-train it until satisfied.
-6. I am not a decent coder, but I have tried my best to optimize the code. Any contributions are welcomed, just don't forget unit test! (I might ask for your contribution's effects if you don't mind.)
+6. I am not a decent coder, but I have tried my best to optimize the code. Any contributions are welcomed, just that I might ask for your contribution's effects if you don't mind.
