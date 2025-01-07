@@ -97,6 +97,8 @@ source ~/.bash_profile
 powershell $old_path = [Environment]::GetEnvironmentVariable('path', 'user'); $new_path = $old_path + ';' + $PWD; [Environment]::SetEnvironmentVariable('path', $new_path,'User');
 ```
 
+**Lưu ý:** Đừng quên chỉnh file `chessai.cmd` để phù hợp với nhu cầu.
+
 <br>
 
 # Sử dụng

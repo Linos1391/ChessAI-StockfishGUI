@@ -35,6 +35,8 @@ class ModifiedStockfish(Stockfish):
             if self.print_command:
                 print(f'\r{(os.get_terminal_size().columns) * ' '}', end='') # clear line
                 print(f'\rLast Input: {command}', end='')
+                if command == 'quit':
+                    print('')
             # so the credit is given
             self._stockfish.stdin.write(f"{command}\n")
             self._stockfish.stdin.flush()

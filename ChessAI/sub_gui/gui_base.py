@@ -310,4 +310,3 @@ full moves. It starts at 1 and\nis incremented after Black's move")
         if os.path.isfile(PROJECT_PATH / 'history.json'):
             os.remove(PROJECT_PATH / 'history.json')
         self.mainwindow.destroy()
-        print('')
