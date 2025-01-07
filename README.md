@@ -86,7 +86,7 @@ Then find your OS below.
 
 #### For Unix
 ```
-chmod a+x locas.cmd
+chmod a+x chessai.cmd
 echo 'export chessai_path=$PWD
 export PATH=$chessai_path:$PATH' >> ~/.bash_profile
 source ~/.bash_profile
