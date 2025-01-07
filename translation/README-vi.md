@@ -86,7 +86,7 @@ Sau đó tìm OS của bạn.
 
 #### Cho Unix
 ```
-chmod a+x locas.cmd
+chmod a+x chessai.cmd
 echo 'export chessai_path=$PWD
 export PATH=$chessai_path:$PATH' >> ~/.bash_profile
 source ~/.bash_profile
@@ -105,6 +105,7 @@ Dùng `chessai`.
 ```
 chessai
 ```
+*Nếu bạn dùng Unix và đang không ở trong environment có ChessAI, dùng `chessai.cmd`.*
 
 <br>
 

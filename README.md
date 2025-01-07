@@ -76,7 +76,7 @@ Please paste in path to stockfish:
 
 <br>
 
-# I use Venv/Conda/Docker/...
+# But you use Venv/Conda/Docker/...?
 
 Go to your ChessAI directory (where `chessai.cmd` is stored).
 ```
@@ -86,7 +86,7 @@ Then find your OS below.
 
 #### For Unix
 ```
-chmod a+x locas.cmd
+chmod a+x chessai.cmd
 echo 'export chessai_path=$PWD
 export PATH=$chessai_path:$PATH' >> ~/.bash_profile
 source ~/.bash_profile
@@ -105,6 +105,7 @@ Use `chessai`.
 ```
 chessai
 ```
+*If you are using Unix and currently not in the environment where ChessAI is stored, use `chessai.cmd`.*
 
 <br>
 

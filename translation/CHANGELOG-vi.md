@@ -1,4 +1,10 @@
-### v1.0.0
+# v1.0.1 - v1.0.2
+
+- Sửa lỗi và chỉnh lại README.
+
+<br>
+
+# v1.0.0
 
 - Cuối cùng nó cũng lên PyPI rồi. Giờ bạn có thể pip install nó!
 
@@ -8,13 +14,17 @@
 
 - Xin lỗi em, điểm O.P và I.P. Anh không giận gì em đâu. Anh cũng chả hận thù gì người trên cõi đời này. Anh thấy, thế gian giờ thật tươi đẹp biết bao. Trên trời dưới đất, tao mạnh nhất. (PyTorch đã có mặt!!!)
 
-#### v0.2.1
+<br>
+
+# v0.2.1
 
 - Thêm thông tin của mẫu và điểm O.P, I.P.
 
 ![features_11](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/assets/features_11.png?raw=true)
 
-#### v0.2.0
+<br>
+
+# v0.2.0
 
 - Cuối cùng, chúng ta cũng có tab vision (vì đang trong dang dở nên sẽ có lỗi).
 
@@ -30,25 +40,33 @@
 
 ![features_10](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/assets/features_10.png?raw=true)
 
-#### v0.1.3
+<br>
+
+# v0.1.3
 
 - Có thể 'đi lại' và 'đi lại quá trình đi lại' nước cờ.
 
 ![feature_7](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/assets/features_7.gif?raw=true)
 
-#### v0.1.2
+<br>
+
+# v0.1.2
 
 - Hiển thị phần sửa đổi ở tab 'Settings'.
 
 ![feature_6](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/assets/features_6.gif?raw=true)
 
-#### v0.1.1
+<br>
+
+# v0.1.1
 
 - Nước đi tốt nhất dễ nhìn hơn.
 
 ![features_5](https://github.com/Linos1391/ChessAI-StockfishGUI/blob/main/assets/features_5.gif?raw=true)
 
-#### v0.1.0
+<br>
+
+# v0.1.0
 
 - Thiết lập ván cờ bằng cơ chế kéo thả.
 
