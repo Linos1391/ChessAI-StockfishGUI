@@ -105,6 +105,7 @@ Dùng `chessai`.
 ```
 chessai
 ```
+*Nếu bạn dùng Unix và đang không ở trong environment có ChessAI, dùng `chessai.cmd`.*
 
 <br>
 
