@@ -105,7 +105,7 @@ Use `chessai`.
 ```
 chessai
 ```
-
+*If you are using Unix and currently not in the environment where ChessAI is stored, use `chessai.cmd`.*
 <br>
 
 # License
