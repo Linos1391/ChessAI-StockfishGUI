@@ -5,8 +5,9 @@ import setuptools
 
 setuptools.setup(
     name="chessai-stockfish",
-    version="1.0.1",
-    description="This is a sub-window GUI for Stockfish.",
+    version="1.0.3",
+    description="A sub-window GUI for Stockfish. \
+(Contributions are welcomed, but I might won't touch this any sooner)",
     long_description=pathlib.Path('README.md').read_text(encoding="utf-8"),
     long_description_content_type="text/markdown",
     author="Linos",
