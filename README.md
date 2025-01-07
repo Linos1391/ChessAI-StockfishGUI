@@ -76,7 +76,7 @@ Please paste in path to stockfish:
 
 <br>
 
-# I use Venv/Conda/Docker/...
+# But you use Venv/Conda/Docker/...?
 
 Go to your ChessAI directory (where `chessai.cmd` is stored).
 ```
