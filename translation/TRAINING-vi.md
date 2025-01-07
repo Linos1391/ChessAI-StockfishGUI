@@ -1,4 +1,4 @@
-## Giới thiệu
+# Giới thiệu
 
 Vậy bạn muốn làm một template cho riêng mình? Nghe hay đấy, nhưng sẽ có vài vấn đề phát sinh như sau:
 - Khoảng 2.5GB của PyTorch.
@@ -8,7 +8,9 @@ Vậy bạn muốn làm một template cho riêng mình? Nghe hay đấy, nhưng
 
 Dù vậy, bạn vẫn muốn tiếp tục? Vậy thì đi thôi!
 
-## Chuẩn bị
+<br>
+
+# Chuẩn bị
 
 Dĩ nhiên tôi sẽ không cho khả năng train model thành tính năng mặc định. Đầu tiên thì tải PyTorch. Đến [PyTorch](https://pytorch.org/get-started/locally/) và tải phiên bản phù hợp với máy. (Đừng quên bỏ `torchaudio` ra)
 
@@ -24,7 +26,9 @@ pip3 install pandas
 ```
 Sau những bước kể trên, tính năng train model đã được mở khoá. Nhưng đừng đi vội, để tôi cho bạn vài mẹo này!
 
-## Mẹo bỏ túi
+<br>
+
+# Mẹo bỏ túi
 
 1. Template phải là bàn cờ khởi đầu (cái bàn lúc mới vô, chưa đi quân nào hết).
 2. Khi thêm template mới, KHÔNG được xén quá sát.
