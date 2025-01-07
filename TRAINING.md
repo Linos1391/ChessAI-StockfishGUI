@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 So you want to make your own templates? Sound good, but that will go with the following issues:
 - Approximately 2.5GB of PyTorch.
@@ -8,7 +8,9 @@ So you want to make your own templates? Sound good, but that will go with the fo
 
 With all of that in mind, and you're still with me? Then let's go!
 
-## Preparing
+<br>
+
+# Preparing
 
 Of course I won't make the training as default feature. Let's install PyTorch first. Visit [PyTorch](https://pytorch.org/get-started/locally/) and install the suitable version. (Don't forget to remove `torchaudio`)
 
@@ -24,7 +26,9 @@ pip3 install pandas
 ```
 After these steps, the training features has been unlocked. But don't go yet, let me give you some tips!
 
-## Pocket Tips
+<br>
+
+# Pocket Tips
 
 1. The template must be starting chessboard (the initial chessboard before any moves).
 2. When add new templates, you must NOT crop it too tight. 
